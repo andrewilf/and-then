@@ -6,9 +6,10 @@ const HomePage = () => {
       <Title order={1} align="center">
         Trending Prompts
       </Title>
-      <Space h="10px" />
+      <Space h="20px" />
 
       <Group position="apart">
+        <PromptCard />
         <PromptCard />
         <PromptCard />
         <PromptCard />
@@ -18,7 +19,7 @@ const HomePage = () => {
       <Title order={1} align="center">
         Recent Prompts
       </Title>
-      <Space h="10px" />
+      <Space h="20px" />
 
       <Group position="apart">
         <PromptCard />
