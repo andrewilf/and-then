@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
+import {BrowserRouter} from "react-router-dom"
 ReactDOM.render(
+  <BrowserRouter>
   <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles>
     <App />
-  </MantineProvider>,
-  
+  </MantineProvider>
+  </BrowserRouter>,
+
   document.getElementById('root')
 );
 

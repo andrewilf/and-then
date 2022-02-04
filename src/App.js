@@ -6,7 +6,9 @@ import { Button } from "@mantine/core";
 import NavigationBar from "./components/NavigationBar";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
-
+import AboutPage from "./components/AboutPage";
+import NewPage from "./components/NewPage";
+import AllPromptsPage from "./components/AllPromptsPage";
 function App() {
   const theme = useMantineTheme();
 
@@ -26,7 +28,12 @@ function App() {
       }
     >
       <Button variant="filled">yes</Button>
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/prompts" element={<AllPromptsPage />} />
+        <Route path="/iamnew" element={<NewPage />} />
+      </Routes>
       <Footer />
     </AppShell>
   );
