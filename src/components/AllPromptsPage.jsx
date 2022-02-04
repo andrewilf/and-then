@@ -1,9 +1,7 @@
 import { Title, Space, Group, Button, Input } from "@mantine/core";
 import PromptCard from "./PromptCard";
-import {
-    MagnifyingGlassIcon,
-    PlusIcon
-  } from "@modulz/radix-icons";
+import SelectTags from "./SelectTags";
+import { MagnifyingGlassIcon, PlusIcon } from "@modulz/radix-icons";
 const AllPromptsPage = () => {
   return (
     <div style={{ padding: "2% 5% 5% 5%" }}>
@@ -13,9 +11,9 @@ const AllPromptsPage = () => {
       <Space h="20px" />
 
       <Group position="apart">
-      <Button leftIcon={<PlusIcon/>} size="sm" radius="md" color="dark">
-            Create Prompt
-          </Button>
+        <Button leftIcon={<PlusIcon />} size="sm" radius="md" color="dark">
+          Create Prompt
+        </Button>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Input
             size="md"
@@ -24,11 +22,17 @@ const AllPromptsPage = () => {
             placeholder="Prompt name"
           />
           <Space w="5px" />
-          <Button leftIcon={<MagnifyingGlassIcon/>} size="sm" radius="md" color="dark">
+          <Button
+            leftIcon={<MagnifyingGlassIcon />}
+            size="sm"
+            radius="md"
+            color="dark"
+          >
             Search
           </Button>
         </div>
       </Group>
+      <SelectTags />
 
       <Space h="40px" />
       <Group position="apart">
