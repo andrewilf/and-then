@@ -21,7 +21,7 @@ const Footer = () => {
     <div
       style={{
         backgroundColor: theme.colors.dark[5],
-        height: "220px",
+        height: "200px",
         width: "100%",
         padding: "30px 60px 30px 60px",
       }}
@@ -106,6 +106,9 @@ const Footer = () => {
           </Anchor>
           <Anchor component={Link} variant="text" to="/prompts">
             Suprise! Pirates
+          </Anchor>
+          <Anchor component={Link} variant="text" to="/prompts">
+            How to go back to tomorrow
           </Anchor>
         </div>
         <div style={{ alignSelf: "flex-start", marginRight: "10px" }}>

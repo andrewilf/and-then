@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage";
 import AboutPage from "./components/AboutPage";
 import NewPage from "./components/NewPage";
 import AllPromptsPage from "./components/AllPromptsPage";
+import CreateNodePage from "./components/CreateNodePage"
 function App() {
   const theme = useMantineTheme();
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/prompts" element={<AllPromptsPage />} />
         <Route path="/iamnew" element={<NewPage />} />
+        <Route path="/createnode" element={<CreateNodePage />} />
       </Routes>
       <Footer />
     </AppShell>

@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-left {
+  text-align: left;
+}
+
+.ql-align-center {
+  text-align: center;
+}
