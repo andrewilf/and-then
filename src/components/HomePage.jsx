@@ -1,0 +1,83 @@
+
+
+const HomePage = () => {
+
+    return(
+        <div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+            <div>navbar</div>
+        </div>
+    )
+}
+
+export default HomePage
