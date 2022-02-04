@@ -1,83 +1,11 @@
-
+import { Text } from "@mantine/core";
 
 const HomePage = () => {
+  return (
+    <div>
+      <Text></Text>
+    </div>
+  );
+};
 
-    return(
-        <div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-            <div>navbar</div>
-        </div>
-    )
-}
-
-export default HomePage
+export default HomePage;
