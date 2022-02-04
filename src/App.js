@@ -27,7 +27,6 @@ function App() {
         </Header>
       }
     >
-      <Button variant="filled">yes</Button>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
