@@ -14,14 +14,14 @@ function App() {
 
   return (
     <AppShell
-      padding="md"
+      padding="0"
       fixed="true"
-      style={{ background: theme.colors.dark[4] }}
+      style={{ backgroundColor: theme.colors.dark[4]}}
       header={
         <Header
           height={80}
           padding="xl"
-          style={{ background: theme.colors.dark[5] }}
+          style={{ backgroundColor: theme.colors.dark[5] }}
         >
           <NavigationBar />
         </Header>
