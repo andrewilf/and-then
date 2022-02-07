@@ -32,10 +32,14 @@ const AllPromptsPage = () => {
           </Button>
         </div>
       </Group>
-      <SelectTags />
+      <SelectTags multiple={true}/>
 
       <Space h="40px" />
       <Group position="apart">
+        <PromptCard />
+        <PromptCard />
+        <PromptCard />
+        <PromptCard />
         <PromptCard />
         <PromptCard />
         <PromptCard />
