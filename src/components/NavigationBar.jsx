@@ -10,7 +10,7 @@ const NavigationBar = () => {
         <Anchor component={Link} variant="text" to="/">
           logo here
         </Anchor>
-        <Anchor component={Link} variant="text" to="/prompts">
+        <Anchor component={Link} variant="text" to="/prompt">
           Random Prompt
         </Anchor>
         <Anchor component={Link} variant="text" to="/prompts">

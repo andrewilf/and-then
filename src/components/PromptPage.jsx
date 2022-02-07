@@ -1,0 +1,114 @@
+import {
+  Title,
+  Image,
+  Space,
+  Group,
+  Text,
+  Switch,
+  Button,
+  Divider,
+  Textarea,
+  Collapse,
+} from "@mantine/core";
+import { useState } from "react";
+import StoryNode from "./StoryNode";
+
+const PromptPage = () => {
+  const [collapsePrompt, setcollapsePrompt] = useState(false);
+  const [collapseInfo, setCollapseInfo] = useState(false);
+  const additionalInfo =
+    " Serious nodes only, 1st Person view only. \nAdding Weekly, Fridays 9pm SGT Planning to maybe end in 50 nodes. \nNothing too graphic, 12 - 17 year old target audience \nDiscord channel for Discussions: https://www.invitelegit.com";
+  return (
+    <div style={{ padding: "2% 5% 5% 5%" }}>
+      <Title order={1} align="center">
+        Letter Runner
+      </Title>
+      <Space h="20px" />
+      <div style={{ width: "70%", margin: "auto" }}>
+        <Image
+          style={{ width: "100%", margin: "auto" }}
+          src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+          radius="lg"
+          height={400}
+          alt="Norway"
+        />
+        <Space h="20px" />
+        <Group position="apart">
+          <Group>
+            <Text>Rating: Teen</Text>
+            <Text>Genre: Thriller</Text>
+          </Group>
+
+          <Text>Prompt Owner: UserTest1</Text>
+        </Group>
+        <Group position="apart">
+          <Group>
+            <Text>Followers: 100</Text>
+            <Text>Nodes: 3</Text>
+          </Group>
+
+          <Text>Created: 10 Jan 2021</Text>
+        </Group>
+        <Group position="apart">
+          <Switch
+            size="md"
+            label="Follow"
+            color="green"
+            styles={{
+              input: { backgroundColor: "gray" },
+            }}
+          />
+          <Text>Last updated: 19 Jan 2021</Text>
+        </Group>
+        <Space h="20px" />
+        <Group position="apart">
+          <Button
+            radius="md"
+            color="dark"
+            onClick={() => setcollapsePrompt((o) => !o)}
+          >
+            Toggle Prompt
+          </Button>
+          <Button radius="md" color="dark">
+            Edit
+          </Button>
+        </Group>
+        <Collapse in={collapsePrompt}>
+          <Space h="20px" />
+          One day a boys destiny changed forever after a letter from his
+          estranged uncle arrived. It contained a check for one million dollars
+          with a bloody note saying: “spend it well and hide”
+        </Collapse>
+        <Space h="20px" />
+        <Button
+          radius="md"
+          color="dark"
+          onClick={() => setCollapseInfo((o) => !o)}
+        >
+          Toggle additional info
+        </Button>
+        <Collapse in={collapseInfo}>
+          <Space h="20px" />
+          <Text style={{ whiteSpace: "pre-line" }}>{additionalInfo}</Text>
+
+          {/* <Textarea
+            onChange={(event) => {
+              setarea(event.currentTarget.value);
+              console.log(area);
+            }}
+            value={area}
+          />
+          <Text style={{ whiteSpace: "pre-line" }}>{area}</Text> */}
+        </Collapse>
+        <Space h="20px" />
+        <Divider />
+        <StoryNode />
+        <StoryNode />
+        <StoryNode />
+        <StoryNode />
+      </div>
+    </div>
+  );
+};
+
+export default PromptPage;

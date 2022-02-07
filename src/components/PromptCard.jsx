@@ -18,7 +18,7 @@ const PromptCard = () => {
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
 
   return (
-    <div style={{ width: 340, margin: "auto" }}>
+    <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%"}}>
       <Card shadow="sm" padding="lg" radius="lg" withBorder={true}>
         <Card.Section>
           <Image

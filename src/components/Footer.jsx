@@ -73,7 +73,7 @@ const Footer = () => {
           <Anchor component={Link} to="/">
             Home
           </Anchor>
-          <Anchor component={Link} to="/prompts">
+          <Anchor component={Link} to="/prompt">
             Random Prompt
           </Anchor>
           <Anchor component={Link} to="/prompts">
@@ -95,19 +95,19 @@ const Footer = () => {
         >
           <Text weight={700}>RECENT PROMPTS</Text>
           <Divider />
-          <Anchor component={Link} variant="text" to="/prompts">
+          <Anchor component={Link} variant="text" to="/prompt">
             Hunt for the MacGuffin MacMuffin
           </Anchor>
-          <Anchor component={Link} variant="text" to="/prompts">
+          <Anchor component={Link} variant="text" to="/prompt">
             Letter Runner
           </Anchor>
-          <Anchor component={Link} variant="text" to="/prompts">
+          <Anchor component={Link} variant="text" to="/prompt">
             Hackerman
           </Anchor>
-          <Anchor component={Link} variant="text" to="/prompts">
+          <Anchor component={Link} variant="text" to="/prompt">
             Suprise! Pirates
           </Anchor>
-          <Anchor component={Link} variant="text" to="/prompts">
+          <Anchor component={Link} variant="text" to="/prompt">
             How to go back to tomorrow
           </Anchor>
         </div>
