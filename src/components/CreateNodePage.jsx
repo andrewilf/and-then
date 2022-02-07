@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import parse, { domToReact } from "html-react-parser";
+import parse from "html-react-parser";
 import { RichTextEditor } from "@mantine/rte";
 import { Title, Space, Group, Button } from "@mantine/core";
 import "../App.css";
@@ -21,7 +21,7 @@ const CreateNodePage = () => {
   return (
     <div style={{ padding: "5% 5% 5% 5%" }}>
       <Title order={1} align="center">
-        Creating Node for: Letter Runner
+        Creating node for: Letter Runner
       </Title>
       <Space h="20px" />
       <RichTextEditor
@@ -36,6 +36,7 @@ const CreateNodePage = () => {
         ]}
       />
       <Space h="20px" />
+      <Group position="center">
       <Button
         color="dark"
         radius="md"
@@ -49,6 +50,8 @@ const CreateNodePage = () => {
       >
         Submit Node
       </Button>
+      </Group>
+      
       <div>{parse(display)}</div>
     </div>
   );

@@ -3,13 +3,13 @@ import {
   Image,
   Text,
   Badge,
-  Button,
   Group,
   useMantineTheme,
   Divider,
   Space,
   Title,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 const PromptCard = () => {
   const theme = useMantineTheme();
@@ -18,8 +18,15 @@ const PromptCard = () => {
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
 
   return (
-    <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%"}}>
-      <Card shadow="sm" padding="lg" radius="lg" withBorder={true}>
+    <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}>
+      <Card
+        component={Link}
+        to="/prompt"
+        shadow="sm"
+        padding="lg"
+        radius="lg"
+        withBorder={true}
+      >
         <Card.Section>
           <Image
             src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
@@ -32,7 +39,9 @@ const PromptCard = () => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Title order={2} weight={700}>Letter Runner</Title>
+          <Title order={2} weight={700}>
+            Letter Runner
+          </Title>
           <Badge color="orange" variant="light">
             Teen
           </Badge>
@@ -41,7 +50,9 @@ const PromptCard = () => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text weight={700} size="xs">Thriller</Text>
+          <Text weight={700} size="xs">
+            Thriller
+          </Text>
           <Text size="xs">Followers: 1000</Text>
           <Text size="xs">Nodes: 12</Text>
         </Group>

@@ -1,4 +1,4 @@
-import { Chips, Chip, useMantineTheme, Group } from "@mantine/core";
+import { Chips, Chip, useMantineTheme } from "@mantine/core";
 
 const SelectTags = (props) => {
   const theme = useMantineTheme();

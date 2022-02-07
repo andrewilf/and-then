@@ -7,19 +7,28 @@ import {
   Switch,
   Button,
   Divider,
-  Textarea,
   Collapse,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import StoryNode from "./StoryNode";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Pencil1Icon } from "@modulz/radix-icons";
 
 const PromptPage = () => {
   const [collapsePrompt, setcollapsePrompt] = useState(false);
   const [collapseInfo, setCollapseInfo] = useState(false);
+  const prompt =
+    "One day a boys destiny changed forever after a letter from his estranged uncle arrived. \nIt contained a check for one million dollars with a bloody note saying: \“spend it well and hide\”";
   const additionalInfo =
     " Serious nodes only, 1st Person view only. \nAdding Weekly, Fridays 9pm SGT Planning to maybe end in 50 nodes. \nNothing too graphic, 12 - 17 year old target audience \nDiscord channel for Discussions: https://www.invitelegit.com";
   return (
-    <div style={{ padding: "2% 5% 5% 5%" }}>
+    <div
+      style={{
+        padding: "2% 5% 5% 5%",
+      }}
+    >
       <Title order={1} align="center">
         Letter Runner
       </Title>
@@ -69,15 +78,13 @@ const PromptPage = () => {
           >
             Toggle Prompt
           </Button>
-          <Button radius="md" color="dark">
+          <Button radius="md" color="dark" leftIcon={<Pencil1Icon />}>
             Edit
           </Button>
         </Group>
         <Collapse in={collapsePrompt}>
           <Space h="20px" />
-          One day a boys destiny changed forever after a letter from his
-          estranged uncle arrived. It contained a check for one million dollars
-          with a bloody note saying: “spend it well and hide”
+          <Text style={{ whiteSpace: "pre-line" }}>{prompt}</Text>
         </Collapse>
         <Space h="20px" />
         <Button
@@ -91,14 +98,6 @@ const PromptPage = () => {
           <Space h="20px" />
           <Text style={{ whiteSpace: "pre-line" }}>{additionalInfo}</Text>
 
-          {/* <Textarea
-            onChange={(event) => {
-              setarea(event.currentTarget.value);
-              console.log(area);
-            }}
-            value={area}
-          />
-          <Text style={{ whiteSpace: "pre-line" }}>{area}</Text> */}
         </Collapse>
         <Space h="20px" />
         <Divider />
@@ -106,7 +105,43 @@ const PromptPage = () => {
         <StoryNode />
         <StoryNode />
         <StoryNode />
+        <Divider />
+        <Space h="20px" />
+        <Title order={2}>And Then...</Title>
+        <Carousel
+          centerMode={true}
+          centerSlidePercentage={97}
+          style={{ color: "red" }}
+          showArrows={true}
+          showStatus={false}
+          infiniteLoop={true}
+          useKeyboardArrows={true}
+        >
+          <div style={{ margin: "8px" }}>
+            <StoryNode canApprove={true} canEdit={true} />
+          </div>
+          <div style={{ margin: "8px" }}>
+            <StoryNode canApprove={true} canEdit={true} />
+          </div>
+          <div style={{ margin: "8px" }}>
+            <StoryNode canApprove={true} canEdit={true} />
+          </div>
+          <div style={{ margin: "8px" }}>
+            <StoryNode canApprove={true} canEdit={true} />
+          </div>
+        </Carousel>
       </div>
+      <Group position="center">
+        <Button
+          component={Link}
+          to="/createnode"
+          radius="md"
+          size="xl"
+          color="dark"
+        >
+          Suggest node
+        </Button>
+      </Group>
     </div>
   );
 };
