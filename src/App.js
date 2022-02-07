@@ -11,6 +11,7 @@ import NewPage from "./components/NewPage";
 import AllPromptsPage from "./components/AllPromptsPage";
 import CreateNodePage from "./components/CreateNodePage"
 import PromptPage from "./components/PromptPage"
+import ProfilePage from "./components/ProfilePage";
 function App() {
   const theme = useMantineTheme();
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/iamnew" element={<NewPage />} />
         <Route path="/createnode" element={<CreateNodePage />} />
         <Route path="/prompt" element={<PromptPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
       <Footer />
     </AppShell>

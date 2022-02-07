@@ -34,7 +34,10 @@ const NavigationBar = () => {
           >
             U
           </div>
-          <Text>UserTest1 | Logout</Text>
+          <Group>
+            <Text component={Link} to="/profile">UserTest1 | </Text>
+            <Text component={Link} to="/">Logout</Text>
+          </Group>
         </div>
       </Group>
     </div>
