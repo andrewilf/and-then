@@ -1,8 +1,10 @@
 import { Text, Group, Button } from "@mantine/core";
 import { CheckIcon, Cross2Icon, Pencil1Icon } from "@modulz/radix-icons";
+import parse from "html-react-parser";
 
 const StoryNode = (props) => {
-  const text =
+  const htmlText = "<p>Your initial <strong>html value</strong> or an empty string to init editor without value</p><p>asdasdasdt editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valu</p>"
+  const stringText =
     "testtesttesttesttesttesttesttesttesttesttesttesttesttesttestte sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte sttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest test";
   return (
     <div
@@ -22,7 +24,7 @@ const StoryNode = (props) => {
         last edited: 13 Jan 2021
       </Text>
       <Text align="left" style={{ whiteSpace: "pre-line" }}>
-        {text}
+        {parse(htmlText)}
       </Text>
       <Group spacing="5px" position="right">
         {props.canEdit ? (
