@@ -14,9 +14,11 @@ import {
 import SelectTags from "./SelectTags";
 const CreatePromptPage = () => {
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
-  console.log(genreTags);
+  const [imageURL, setimageURL] = useState(
+    "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+  );
   return (
-    <div style={{ padding: "5% 5% 5% 5%", width: "80%", margin: "auto" }}>
+    <div style={{ padding: "5% 5% 5% 5%", width: "70%", margin: "auto" }}>
       <Title order={1} align="center">
         Create Prompt
       </Title>
@@ -62,39 +64,44 @@ const CreatePromptPage = () => {
         <Text>Rating</Text>
 
         <SelectTags tags={["Everyone", "Teen", "Mature"]} />
-        <InputWrapper
-          id="input-image"
-          label="Banner Image"
-          description="Please enter select a banner image."
-          error="image error"
-        >
-          {/* <Textarea id="input-image" autosize minRows={4} /> */}
-          <Group position="apart" grow align>
+        <Group position="apart" grow align>
+          <InputWrapper
+            id="input-image"
+            label="Banner Image"
+            description="Please enter select a banner image."
+            error="image error"
+          >
+            {/* <Textarea id="input-image" autosize minRows={4} /> */}
+
             <Select
-              onChange={() => {}}
+              onChange={(value) => {
+                setimageURL(value);
+              }}
               id="input-image"
               placeholder="Pick one"
               data={[
-                { value: "react", label: "React" },
-                { value: "ng", label: "Angular" },
-                { value: "svelte", label: "Svelte" },
-                { value: "vue", label: "Vue" },
+                {
+                  value:
+                    "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
+                  label: "Norway",
+                },
+                {
+                  value:
+                    "https://imageio.forbes.com/specials-images/imageserve/1026205392/Beautiful-luxury-home-exterior-at-twilight/960x0.jpg?fit=bounds&format=jpg&width=960",
+                  label: "House",
+                },
               ]}
             />
-            <Image
-              src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-              height={160}
-              alt="Norway"
-              radius={"md"}
-            />
-          </Group>
-        </InputWrapper>
+          </InputWrapper>
+          <Image src={imageURL} height={160} alt="Norway" radius={"md"} />
+        </Group>
       </Group>
       <Space h="25px" />
       <Group position="center">
-        <Button radius="md" color="dark" size="xl">
+        <Button radius="xl" color="dark" size="xl">
           Publish prompt
         </Button>
+        {/* <Text>{imageURL}</Text> */}
       </Group>
     </div>
   );
