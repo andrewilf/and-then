@@ -6,16 +6,26 @@ import {
   PasswordInput,
   Button,
   Anchor,
+  Blockquote,
+  LoadingOverlay,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { EnvelopeOpenIcon, LockClosedIcon } from "@modulz/radix-icons";
-import { useForm } from '@mantine/hooks';
+import { useForm } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 
-const SigninPage = () => {
+const SigninPage = (props) => {
+  
+
   return (
     <div style={{ width: "50%", margin: "auto", padding: "5% 5% 5% 5%" }}>
       <Group position="center" direction="column" grow>
         <Title align="center">Login</Title>
+  
+        <Blockquote cite={props.quoteAuthor}>
+          {props.quote}
+        </Blockquote>
+       
         <InputWrapper
           id="input-email"
           required
@@ -36,7 +46,11 @@ const SigninPage = () => {
           description="Please enter password."
           error="password error"
         >
-          <PasswordInput id="input-password" icon={<LockClosedIcon />} placeholder="Your password" />
+          <PasswordInput
+            id="input-password"
+            icon={<LockClosedIcon />}
+            placeholder="Your password"
+          />
         </InputWrapper>
       </Group>
       <Group position="apart">

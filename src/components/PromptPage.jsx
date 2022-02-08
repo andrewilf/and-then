@@ -20,10 +20,11 @@ const PromptPage = () => {
   const [collapsePrompt, setcollapsePrompt] = useState(false);
   const [collapseInfo, setCollapseInfo] = useState(false);
   const prompt =
-    "One day a boys destiny changed forever after a letter from his estranged uncle arrived. \nIt contained a check for one million dollars with a bloody note saying: \“spend it well and hide\”";
+    "One day a boys destiny changed forever after a letter from his estranged uncle arrived. \nIt contained a check for one million dollars with a bloody note saying: “spend it well and hide”";
   const additionalInfo =
     " Serious nodes only, 1st Person view only. \nAdding Weekly, Fridays 9pm SGT Planning to maybe end in 50 nodes. \nNothing too graphic, 12 - 17 year old target audience \nDiscord channel for Discussions: https://www.invitelegit.com";
-  return (
+  
+    return (
     <div
       style={{
         padding: "2% 5% 5% 5%",
@@ -78,7 +79,13 @@ const PromptPage = () => {
           >
             Toggle Prompt
           </Button>
-          <Button radius="md" color="dark" leftIcon={<Pencil1Icon />}>
+          <Button
+            radius="md"
+            color="dark"
+            leftIcon={<Pencil1Icon />}
+            component={Link}
+            to="/editprompt"
+          >
             Edit
           </Button>
         </Group>
@@ -97,7 +104,6 @@ const PromptPage = () => {
         <Collapse in={collapseInfo}>
           <Space h="20px" />
           <Text style={{ whiteSpace: "pre-line" }}>{additionalInfo}</Text>
-
         </Collapse>
         <Space h="20px" />
         <Divider />

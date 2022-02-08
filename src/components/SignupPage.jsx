@@ -6,16 +6,20 @@ import {
   PasswordInput,
   Button,
   Anchor,
+  Blockquote
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { EnvelopeOpenIcon, PersonIcon } from "@modulz/radix-icons";
 import { useForm } from '@mantine/hooks';
 
-const SignupPage = () => {
+const SignupPage = (props) => {
   return (
     <div style={{ width: "50%", margin: "auto", padding: "5% 5% 5% 5%" }}>
       <Group position="center" direction="column" grow>
         <Title align="center">Create account</Title>
+        <Blockquote cite={props.quoteAuthor}>
+          {props.quote}
+        </Blockquote>
         <InputWrapper
           id="input-username"
           required

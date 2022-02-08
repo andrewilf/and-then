@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Title,
   Space,
@@ -12,15 +12,22 @@ import {
   Image,
 } from "@mantine/core";
 import SelectTags from "./SelectTags";
-const CreatePromptPage = () => {
+import { useWindowScroll } from "@mantine/hooks";
+
+const EditPromptSection = () => {
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
   const [imageURL, setimageURL] = useState(
     "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
   );
+  const [scroll, scrollTo] = useWindowScroll();
+
+  useEffect(() => {
+    scrollTo({ y: 0 });
+  }, []);
   return (
     <div style={{ padding: "5% 5% 5% 5%", width: "70%", margin: "auto" }}>
       <Title order={1} align="center">
-        Create Prompt
+        Edit Prompt: Letter Runner
       </Title>
       <Space h="20px" />
       <Group direction="column" grow>
@@ -31,7 +38,7 @@ const CreatePromptPage = () => {
           description="Please enter your prompt title."
           error="title error"
         >
-          <Input id="input-title" />
+          <Input id="input-title" value={"Letter Runner"} />
         </InputWrapper>
         <InputWrapper
           id="input-prompt"
@@ -99,11 +106,11 @@ const CreatePromptPage = () => {
       <Space h="25px" />
       <Group position="center">
         <Button radius="xl" color="dark" size="xl">
-          Publish prompt
+          Edit prompt
         </Button>
       </Group>
     </div>
   );
 };
 
-export default CreatePromptPage;
+export default EditPromptSection;
