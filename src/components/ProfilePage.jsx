@@ -2,7 +2,7 @@
 
 const ProfilePage = () => {
   return (
-    <div>
+    <div style={{ width: "50%", margin: "auto", padding: "5% 5% 5% 5%" }}>
       ProfilePage
     </div>
   );

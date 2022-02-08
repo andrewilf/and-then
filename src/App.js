@@ -12,8 +12,12 @@ import AllPromptsPage from "./components/AllPromptsPage";
 import CreateNodePage from "./components/CreateNodePage"
 import PromptPage from "./components/PromptPage"
 import ProfilePage from "./components/ProfilePage";
+import SignupPage from "./components/SignupPage";
+import SigninPage from "./components/SigninPage";
+
 function App() {
   const theme = useMantineTheme();
+  const [loggedIn, setLoggedIn] = useState(true)
 
   return (
     <AppShell
@@ -26,7 +30,7 @@ function App() {
           padding="xl"
           style={{ backgroundColor: theme.colors.dark[5] }}
         >
-          <NavigationBar />
+          <NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         </Header>
       }
     >
@@ -38,6 +42,8 @@ function App() {
         <Route path="/createnode" element={<CreateNodePage />} />
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/signin" element={<SigninPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
       <Footer />
     </AppShell>
