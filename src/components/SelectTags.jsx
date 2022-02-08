@@ -2,16 +2,12 @@ import { Chips, Chip, useMantineTheme } from "@mantine/core";
 
 const SelectTags = (props) => {
   const theme = useMantineTheme();
-
+  const tags = (props.tags?props.tags: [""])
+  const ChipsForTags = tags.map((element) => (
+    <Chip value={element}>{element}</Chip>
+  ));
   return (
-    <div
-      style={{
-        width: "40%",
-        marginLeft: "auto",
-        marginRight: "auto",
-        paddingTop: "1%",
-      }}
-    >
+    <div>
       <Chips
         align="center"
         variant="filled"
@@ -24,7 +20,7 @@ const SelectTags = (props) => {
           checkIcon: { color: "green" },
         }}
       >
-        <Chip value="fantasy">Fantasy</Chip>
+        {/* <Chip value="fantasy">Fantasy</Chip>
         <Chip value="thriller">Thriller</Chip>
         <Chip value="adventure">Adventure</Chip>
         <Chip value="historical">Historical</Chip>
@@ -32,7 +28,8 @@ const SelectTags = (props) => {
         <Chip value="horror">Horror</Chip>
         <Chip value="romance">Romance</Chip>
         <Chip value="fanfiction">Fan Fiction</Chip>
-        <Chip value="others">Others</Chip>
+        <Chip value="others">Others</Chip> */}
+        {ChipsForTags}
       </Chips>
     </div>
   );

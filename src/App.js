@@ -14,6 +14,7 @@ import PromptPage from "./components/PromptPage"
 import ProfilePage from "./components/ProfilePage";
 import SignupPage from "./components/SignupPage";
 import SigninPage from "./components/SigninPage";
+import CreatePromptPage from "./components/CreatePromptPage";
 
 function App() {
   const theme = useMantineTheme();
@@ -44,6 +45,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/createprompt" element={<CreatePromptPage />} />
       </Routes>
       <Footer />
     </AppShell>
