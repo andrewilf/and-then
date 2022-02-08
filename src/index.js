@@ -1,18 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { MantineProvider } from '@mantine/core';
-import {BrowserRouter} from "react-router-dom"
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
+import { BrowserRouter } from "react-router-dom";
 ReactDOM.render(
   <BrowserRouter>
-  <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles>
-    <App />
-  </MantineProvider>
+    <MantineProvider theme={{ colorScheme: "dark" }} withGlobalStyles>
+      <ModalsProvider>
+        <App />
+      </ModalsProvider>
+    </MantineProvider>
   </BrowserRouter>,
 
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

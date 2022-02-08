@@ -115,6 +115,7 @@ const PromptPage = () => {
         <Space h="20px" />
         <Title order={2}>And Then...</Title>
         <Carousel
+        showThumbs={false}
           centerMode={true}
           centerSlidePercentage={97}
           style={{ color: "red" }}
