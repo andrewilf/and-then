@@ -27,7 +27,7 @@ const PromptPage = () => {
     return (
     <div
       style={{
-        padding: "2% 5% 5% 5%",
+        padding: "5% 5% 5% 5%",
       }}
     >
       <Title order={1} align="center">
@@ -117,7 +117,7 @@ const PromptPage = () => {
         <Carousel
         showThumbs={false}
           centerMode={true}
-          centerSlidePercentage={97}
+          centerSlidePercentage={98}
           style={{ color: "red" }}
           showArrows={true}
           showStatus={false}

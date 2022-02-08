@@ -8,7 +8,7 @@ const AllPromptsPage = () => {
   const navigate = useNavigate();
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
   return (
-    <div style={{ padding: "2% 5% 5% 5%" }}>
+    <div style={{ padding: "5% 5% 5% 5%" }}>
       <Title order={1} align="center">
         All Prompts
       </Title>

@@ -103,7 +103,7 @@ const ProfilePage = () => {
             <div
               style={{
                 backgroundColor: theme.colors.dark[7],
-                height: "400px",
+                height: "300px",
                 border: "1px solid black",
                 borderRadius: "15px",
                 padding: "5%",
@@ -129,7 +129,7 @@ const ProfilePage = () => {
             <div
               style={{
                 backgroundColor: theme.colors.dark[7],
-                height: "400px",
+                height: "300px",
                 border: "1px solid black",
                 borderRadius: "15px",
                 padding: "5%",
@@ -157,7 +157,6 @@ const ProfilePage = () => {
         useKeyboardArrows={true}
       > */}
         <Group spacing="md" >
-          <PromptCard />
           <PromptCard />
           <PromptCard />
           <PromptCard />

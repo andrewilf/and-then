@@ -1,5 +1,6 @@
-import { Text, Group, Anchor } from "@mantine/core";
+import { Text, Group, Anchor, Image } from "@mantine/core";
 import { Link } from "react-router-dom";
+import logo from "../img/andthenlogo.png";
 
 const NavigationBar = (props) => {
   return (
@@ -8,7 +9,7 @@ const NavigationBar = (props) => {
       <Text size="md">Default text</Text> */}
       <Group position="apart">
         <Anchor component={Link} variant="text" to="/">
-          logo here
+          <Image radius="xs" alt="and then logo" src={logo} height={"40px"} />
         </Anchor>
         <Anchor component={Link} variant="text" to="/prompt">
           Random Prompt
@@ -34,7 +35,9 @@ const NavigationBar = (props) => {
                   marginRight: "9px",
                 }}
               >
-                U
+                <Text component={Link} to="/profile">
+                  U
+                </Text>
               </div>
               <Text component={Link} to="/profile">
                 UserTest1{" "}
