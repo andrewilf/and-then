@@ -46,11 +46,11 @@ const PromptPage = () => {
         <Space h="20px" />
         <Group position="apart">
           <Group>
-            <Badge color="blue" variant="light" radius="xl" size="lg">
-              Thriller
-            </Badge>
             <Badge color="orange" variant="light" radius="xl" size="lg">
               Teen
+            </Badge>
+            <Badge color="orange" variant="outline" radius="xl" size="lg">
+              Thriller
             </Badge>
             <Badge color="yellow" variant="dot" radius="xl" size="lg">
               Ongoing

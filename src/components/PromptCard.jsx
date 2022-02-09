@@ -52,7 +52,7 @@ const PromptCard = () => {
         >
           <Text size="xs">Followers: 1000</Text>
           <Text size="xs">Nodes: 12</Text>
-          <Badge color="blue" variant="light">
+          <Badge color="orange" variant="outline">
             Thriller
           </Badge>
         </Group>

@@ -31,8 +31,7 @@ function App() {
       if (response.ok) {
         // Update DOM elements
         setQuote(data.content);
-        setQuoteAuthor(data.author);
-        console.log(quote, quoteAuthor);
+        setQuoteAuthor("- " + data.author);
       } else {
         quote = "An error occured";
         console.log(data);
@@ -56,7 +55,10 @@ function App() {
       }
     >
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={<HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/prompts" element={<AllPromptsPage />} />
         <Route path="/iamnew" element={<NewPage />} />

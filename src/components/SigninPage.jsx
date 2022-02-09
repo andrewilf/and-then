@@ -7,7 +7,7 @@ import {
   Button,
   Anchor,
   Blockquote,
-  LoadingOverlay,
+  Skeleton,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { EnvelopeOpenIcon, LockClosedIcon } from "@modulz/radix-icons";
@@ -22,9 +22,17 @@ const SigninPage = (props) => {
       <Group position="center" direction="column" grow>
         <Title align="center">Login</Title>
   
-        <Blockquote cite={props.quoteAuthor}>
-          {props.quote}
-        </Blockquote>
+        {props.quoteAuthor === "" ? (
+          <div>
+            
+            <Skeleton height={15} mt={12} radius="xl" />
+            <Skeleton height={15} mt={12} radius="xl" />
+            <Skeleton height={15} mt={12} width="30%" radius="xl" />
+            
+          </div>
+        ) : (
+          <Blockquote cite={props.quoteAuthor}>{props.quote}</Blockquote>
+        )}
        
         <InputWrapper
           id="input-email"

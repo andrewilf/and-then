@@ -14,7 +14,9 @@ import {
 import { Link } from "react-router-dom";
 import SelectTags from "./SelectTags";
 import { ArrowLeftIcon } from "@modulz/radix-icons";
+import { useNotifications } from "@mantine/notifications";
 const CreatePromptPage = () => {
+  const notifications = useNotifications();
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
   const [imageURL, setimageURL] = useState(
     "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
@@ -109,7 +111,19 @@ const CreatePromptPage = () => {
       </Group>
       <Space h="25px" />
       <Group position="center">
-        <Button radius="xl" color="dark" size="xl">
+        <Button
+          radius="xl"
+          color="dark"
+          size="xl"
+          onClick={() => {
+            notifications.showNotification({
+              title: "Prompt created",
+              message: "Hey there, your prompt is now public!",
+              color: "green",
+            //  style: { backgroundColor: "red" },
+            });
+          }}
+        >
           Publish prompt
         </Button>
       </Group>

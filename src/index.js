@@ -6,11 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { BrowserRouter } from "react-router-dom";
+import { NotificationsProvider } from "@mantine/notifications";
 ReactDOM.render(
   <BrowserRouter>
     <MantineProvider theme={{ colorScheme: "dark" }} withGlobalStyles>
       <ModalsProvider>
-        <App />
+        <NotificationsProvider>
+          <App />
+        </NotificationsProvider>
       </ModalsProvider>
     </MantineProvider>
   </BrowserRouter>,
