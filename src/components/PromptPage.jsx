@@ -8,6 +8,7 @@ import {
   Button,
   Divider,
   Collapse,
+  Badge,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -23,8 +24,8 @@ const PromptPage = () => {
     "One day a boys destiny changed forever after a letter from his estranged uncle arrived. \nIt contained a check for one million dollars with a bloody note saying: “spend it well and hide”";
   const additionalInfo =
     " Serious nodes only, 1st Person view only. \nAdding Weekly, Fridays 9pm SGT Planning to maybe end in 50 nodes. \nNothing too graphic, 12 - 17 year old target audience \nDiscord channel for Discussions: https://www.invitelegit.com";
-  
-    return (
+
+  return (
     <div
       style={{
         padding: "5% 5% 5% 5%",
@@ -45,12 +46,20 @@ const PromptPage = () => {
         <Space h="20px" />
         <Group position="apart">
           <Group>
-            <Text>Rating: Teen</Text>
-            <Text>Genre: Thriller</Text>
+            <Badge color="blue" variant="light" radius="xl" size="lg">
+              Thriller
+            </Badge>
+            <Badge color="orange" variant="light" radius="xl" size="lg">
+              Teen
+            </Badge>
+            <Badge color="yellow" variant="dot" radius="xl" size="lg">
+              Ongoing
+            </Badge>
           </Group>
 
           <Text>Prompt Owner: UserTest1</Text>
         </Group>
+        <Space h="10px" />
         <Group position="apart">
           <Group>
             <Text>Followers: 100</Text>
@@ -115,7 +124,7 @@ const PromptPage = () => {
         <Space h="20px" />
         <Title order={2}>And Then...</Title>
         <Carousel
-        showThumbs={false}
+          showThumbs={false}
           centerMode={true}
           centerSlidePercentage={98}
           style={{ color: "red" }}

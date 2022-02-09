@@ -13,6 +13,13 @@ import {
 } from "@mantine/core";
 import SelectTags from "./SelectTags";
 import { useWindowScroll } from "@mantine/hooks";
+import {
+  Cross1Icon,
+  CheckIcon,
+  CrumpledPaperIcon,
+  ArrowLeftIcon,
+} from "@modulz/radix-icons";
+import { Link } from "react-router-dom";
 
 const EditPromptSection = () => {
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
@@ -29,6 +36,14 @@ const EditPromptSection = () => {
       <Title order={1} align="center">
         Edit Prompt: Letter Runner
       </Title>
+      <Button
+        color="dark"
+        leftIcon={<ArrowLeftIcon />}
+        component={Link}
+        to="/prompt"
+      >
+        Back
+      </Button>
       <Space h="20px" />
       <Group direction="column" grow>
         <InputWrapper
@@ -103,12 +118,40 @@ const EditPromptSection = () => {
           <Image src={imageURL} height={160} alt="Norway" radius={"md"} />
         </Group>
       </Group>
-      <Space h="25px" />
-      <Group position="center">
-        <Button radius="xl" color="dark" size="xl">
+      <Space h="45px" />
+      <Group position="apart">
+        {/* <Button
+          radius="xl"
+          color="dark"
+          size="xl"
+          leftIcon={<Cross1Icon />}
+          component={Link}
+          to="/prompt"
+        >
+          Cancel changes
+        </Button> */}
+        <Button
+          radius="md"
+          color="red"
+          size="md"
+          leftIcon={<CrumpledPaperIcon />}
+          component={Link}
+          to="/prompt"
+        >
+          Delete prompt
+        </Button>
+        <Button
+          radius="xl"
+          color="dark"
+          size="xl"
+          leftIcon={<CheckIcon />}
+          component={Link}
+          to="/prompt"
+        >
           Edit prompt
         </Button>
       </Group>
+      <Space h="40px" />
     </div>
   );
 };

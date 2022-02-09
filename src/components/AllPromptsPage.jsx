@@ -51,10 +51,14 @@ const AllPromptsPage = () => {
         }}
       >
         <SelectTags tags={genreTags} multiple={true} />
+        <Space h="md" />
+        <SelectTags tags={["Everyone", "Teen", "Mature"]} multiple={true} />
+        <Space h="md" />
+        <SelectTags tags={["Ongoing", "Completed"]} multiple={true} />
       </div>
 
       <Space h="40px" />
-      <Group position="apart">
+      <Group position="center">
         <PromptCard />
         <PromptCard />
         <PromptCard />
@@ -64,8 +68,6 @@ const AllPromptsPage = () => {
         <PromptCard />
         <PromptCard />
       </Group>
-
-      <Space h="80px" />
     </div>
   );
 };

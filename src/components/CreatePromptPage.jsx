@@ -11,7 +11,9 @@ import {
   Select,
   Image,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import SelectTags from "./SelectTags";
+import { ArrowLeftIcon } from "@modulz/radix-icons";
 const CreatePromptPage = () => {
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
   const [imageURL, setimageURL] = useState(
@@ -22,6 +24,15 @@ const CreatePromptPage = () => {
       <Title order={1} align="center">
         Create Prompt
       </Title>
+      <Button
+        color="dark"
+        leftIcon={<ArrowLeftIcon />}
+        component={Link}
+        to="/prompts"
+      >
+        Back
+      </Button>
+
       <Space h="20px" />
       <Group direction="column" grow>
         <InputWrapper

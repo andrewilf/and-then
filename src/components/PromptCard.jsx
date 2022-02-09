@@ -50,14 +50,20 @@ const PromptCard = () => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text weight={700} size="xs">
-            Thriller
-          </Text>
           <Text size="xs">Followers: 1000</Text>
           <Text size="xs">Nodes: 12</Text>
+          <Badge color="blue" variant="light">
+            Thriller
+          </Badge>
         </Group>
         <Space h="10px" />
-        <Text size="xs">Last update: 28 July 2021</Text>
+        <Group position="apart">
+          <Text size="xs">Last update: 28 July 2021</Text>
+          <Badge color="yellow" variant="dot" radius="xl">
+            Ongoing
+          </Badge>
+        </Group>
+
         <Space h="10px" />
 
         <Divider />
