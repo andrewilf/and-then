@@ -24,6 +24,7 @@ function App() {
   const [quoteAuthor, setQuoteAuthor] = useState("");
 
   useEffect(() => {
+    console.log("starting app");
     async function updateQuote() {
       // Fetch a random quote from the Quotable API
       const response = await fetch("https://api.quotable.io/random");
@@ -33,7 +34,7 @@ function App() {
         setQuote(data.content);
         setQuoteAuthor("- " + data.author);
       } else {
-        quote = "An error occured";
+        setQuote("An error occured");
         console.log(data);
       }
     }
