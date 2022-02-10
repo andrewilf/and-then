@@ -15,7 +15,7 @@ import { useWindowScroll } from "@mantine/hooks";
 import { useState } from "react";
 
 const AllPromptsPage = () => {
-  const [scroll, scrollTo] = useWindowScroll();
+  const [scroll, setScroll] = useWindowScroll();
   const navigate = useNavigate();
   const [activePage, setActivePage] = useState(1);
   //const pagination = usePagination({ total: 11, initialPage: 5 });
@@ -94,7 +94,7 @@ const AllPromptsPage = () => {
           page={activePage}
           onChange={(page) => {
             setActivePage(page);
-            scrollTo({ y: 0 });
+            setScroll({ y: 0 });
             console.log(page);
           }}
         />
