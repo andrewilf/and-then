@@ -39,6 +39,9 @@ function App() {
       }
     }
     updateQuote();
+    // return () => {
+
+    // }
   }, []);
   return (
     <AppShell
