@@ -25,6 +25,7 @@ function App() {
 
   useEffect(() => {
     console.log("starting app");
+    let isMounted = true;
     async function updateQuote() {
       // Fetch a random quote from the Quotable API
       const response = await fetch("https://api.quotable.io/random");
@@ -38,10 +39,12 @@ function App() {
         console.log(data);
       }
     }
-    updateQuote();
-    // return () => {
-
-    // }
+    if (isMounted) {
+      updateQuote();
+    }
+    return () => {
+      isMounted = false;
+    };
   }, []);
   return (
     <AppShell
