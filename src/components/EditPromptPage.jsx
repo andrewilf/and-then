@@ -26,10 +26,10 @@ const EditPromptSection = () => {
   const [imageURL, setimageURL] = useState(
     "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
   );
+  const [scroll, setScroll] = useWindowScroll();
 
   useEffect(() => {
-    const [scroll, setScroll] = useWindowScroll();
-    setScroll({ y: 0 });
+  //  setScroll({ y: 0 });
   }, []);
   return (
     <div style={{ padding: "5% 5% 5% 5%", width: "70%", margin: "auto" }}>
