@@ -75,8 +75,8 @@ const AllPromptsPage = () => {
       status={element.status}
       bannerURL={element.bannerURL}
       promptText={element.promptText}
-      // nodeCount={element.storyline.storyNodes.length}
-      // followerCount={element.storyline.followers.length}
+      // nodeCount={element.storyline[0].storyNodes.length}
+      // followerCount={element.storyline[0].followers.length}
     />
   ));
 

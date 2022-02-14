@@ -8,6 +8,7 @@ import {
   Divider,
   Space,
   Title,
+  ScrollArea,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { parseISO } from "date-fns";
@@ -105,9 +106,11 @@ const PromptCard = (props) => {
         <Divider />
         <Space h="10px" />
 
-        <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
+        {/* <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5,  height: "70px"}}> */}
+        <ScrollArea style={{ height: 90 }} offsetScrollbars>
           {props.promptText}
-        </Text>
+          </ScrollArea>
+        {/* </Text> */}
       </Card>
     </div>
   );
