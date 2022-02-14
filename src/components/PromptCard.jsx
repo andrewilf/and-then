@@ -10,6 +10,7 @@ import {
   Title,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { parseISO } from "date-fns";
 
 const PromptCard = (props) => {
   const theme = useMantineTheme();
@@ -78,15 +79,22 @@ const PromptCard = (props) => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text size="xs">Followers: 1000</Text>
-          <Text size="xs">Nodes: 12</Text>
+          <Text size="xs">Followers: {props.followerCount || "-"}</Text>
+          <Text size="xs">Nodes: {props.nodeCount || "-"}</Text>
           <Badge color={genreColor(props.genre)} variant="outline">
             {props.genre}
           </Badge>
         </Group>
         <Space h="10px" />
         <Group position="apart">
-          <Text size="xs">Last update: 28 July 2021</Text>
+          <Text size="xs">
+            Last update:{" "}
+            {parseISO(props.updated).toLocaleDateString("en-SG", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </Text>
           <Badge color={statusColor[props.status]} variant="dot" radius="xl">
             {props.status}
           </Badge>
