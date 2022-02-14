@@ -14,6 +14,8 @@ const SelectTags = (props) => {
         multiple={props.multiple}
         position="center"
         color="green"
+        value={props.value}
+        onChange={props.setValue}
         styles={{
           label: { color: "grey" },
           checked: { color: "white" },
