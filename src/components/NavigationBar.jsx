@@ -1,15 +1,20 @@
 import { Text, Group, Anchor, Image } from "@mantine/core";
 import { Link } from "react-router-dom";
 import logo from "../img/andthenlogo.png";
+import { LoginContext, adminContext, userContext } from "../global/context";
+import { useContext } from "react";
 
 const NavigationBar = (props) => {
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const { admin, setAdmin } = useContext(adminContext);
+  const { user, setUser } = useContext(userContext);
   return (
     <div>
       {/* <Text color="MantineColor" size="md">Default text</Text>
       <Text size="md">Default text</Text> */}
-      <Group position="apart">
+      <Group position="apart" grow>
         <Anchor component={Link} variant="text" to="/">
-          <Image radius="xs" alt="and then logo" src={logo} height={"40px"} />
+          <Image radius="xs" alt="and then logo" src={logo} height={"45px"} />
         </Anchor>
         <Anchor component={Link} variant="text" to="/prompt">
           Random Prompt
@@ -36,18 +41,21 @@ const NavigationBar = (props) => {
                 }}
               >
                 <Text component={Link} to="/profile">
-                  U
+                  {user.username[0].toUpperCase()}
                 </Text>
               </div>
               <Text component={Link} to="/profile">
-                UserTest1{" "}
+                {user.username}
               </Text>
               <Text> | </Text>
               <Text
                 component={Link}
-                to="/"
+                to="/iamnew"
                 onClick={() => {
-                  props.setLoggedIn(false);
+                  setLoggedIn(false);
+                  setAdmin(false);
+                  setUser(false);
+                  localStorage.removeItem("token");
                   console.log("Logged out");
                 }}
               >

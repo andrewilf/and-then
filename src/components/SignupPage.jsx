@@ -6,6 +6,7 @@ import {
   PasswordInput,
   Button,
   Anchor,
+  Space,
   Blockquote,
   Skeleton,
 } from "@mantine/core";
@@ -63,7 +64,7 @@ const SignupPage = (props) => {
             required
             label="Password"
             description="Please enter a unique password."
-            error="password error"
+           // error="password error"
           >
             <PasswordInput id="input-password" placeholder="Your password" />
           </InputWrapper>
@@ -72,12 +73,13 @@ const SignupPage = (props) => {
             required
             label="Retype Password"
             description="Please retype your password."
-            error="password does not match"
+            //error="password does not match"
           >
             <PasswordInput id="input-password2" placeholder="Retype password" />
           </InputWrapper>
         </Group>
       </Group>
+      <Space h="10px" />
       <Group position="apart">
         <Anchor
           size="xs"
