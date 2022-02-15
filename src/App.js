@@ -72,10 +72,11 @@ function App() {
         setAdmin(false);
         setUser(false);
         setLoggedIn(false);
-        navigate("iamnew");
+        localStorage.removeItem("token");
+       // navigate("iamnew");
       }
     } else {
-      navigate("iamnew");
+     // navigate("iamnew");
       console.log("no access token found");
     }
   };
@@ -102,7 +103,7 @@ function App() {
             style={{ backgroundColor: theme.colors.dark[4] }}
             header={
               <Header
-                height={90}
+                height={100}
                 padding="xl"
                 style={{ backgroundColor: theme.colors.dark[5] }}
               >

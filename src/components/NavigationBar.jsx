@@ -12,9 +12,9 @@ const NavigationBar = (props) => {
     <div>
       {/* <Text color="MantineColor" size="md">Default text</Text>
       <Text size="md">Default text</Text> */}
-      <Group position="apart" grow>
+      <Group position="apart" >
         <Anchor component={Link} variant="text" to="/">
-          <Image radius="xs" alt="and then logo" src={logo} height={"45px"} />
+          <Image radius="xs" alt="and then logo" src={logo} height={"55px"} />
         </Anchor>
         <Anchor component={Link} variant="text" to="/prompt">
           Random Prompt

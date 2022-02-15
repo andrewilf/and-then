@@ -26,17 +26,42 @@ const PromptPage = () => {
   const [collapsePrompt, setcollapsePrompt] = useState(false);
   const [collapseInfo, setCollapseInfo] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [storyNodes, setStoryNodes] = useState([]);
+  const [proposedNodes, setProposedNodes] = useState([]);
+  const storyNodesMapped = storyNodes.map((element) => (
+    <StoryNode
+      key={element._id}
+      text={element.text}
+      author={element.author}
+      updatedAt={element.updatedAt}
+    />
+  ));
+  const proposedNodesMapped = proposedNodes.map((element) => (
+    <div style={{ margin: "8px" }}>
+      <StoryNode
+        canApprove={true}
+        canEdit={true}
+        key={element._id}
+        text={element.text}
+        author={element.author}
+        updatedAt={element.updatedAt}
+      />
+    </div>
+  ));
   const [payload, setPayload] = useState({
-    additionalInfo: "asdasdasd",
+    additionalInfo: "",
     bannerURL: "",
     createdAt: "",
     genre: "",
     owner: "",
     promptText: "",
     rating: "",
+    username: "",
+    storyline: [{ storyNodes: [] }],
     status: "",
     createdAt: "",
     updatedAt: "",
+    followers: [],
   });
   const prompt =
     "One day a boys destiny changed forever after a letter from his estranged uncle arrived. \nIt contained a check for one million dollars with a bloody note saying: “spend it well and hide”";
@@ -79,13 +104,44 @@ const PromptPage = () => {
 
   const promptAPICall = async (page) => {
     setLoading(true);
-    let baseURL = `https://and-then-backend.herokuapp.com/prompt/${promptID}/`;
+    const baseURL = `https://and-then-backend.herokuapp.com/prompt/${promptID}/`;
     try {
       const response = await fetch(baseURL);
       const data = await response.json();
       console.log(data);
-      setPayload(data);
-      setLoading(false);
+      data.promptGetOne.owner = data.username;
+      setPayload(data.promptGetOne);
+
+      if (data.promptGetOne.storyline[0].storyNodes) {
+        console.log("nodes found");
+        const nodeIDs = data.promptGetOne.storyline[0].storyNodes;
+        const nodeURL = `https://and-then-backend.herokuapp.com/node/multi/${nodeIDs}/`;
+        try {
+          const responseNode = await fetch(nodeURL);
+          const dataNode = await responseNode.json();
+          console.log(dataNode);
+          setStoryNodes(dataNode);
+           setLoading(false);
+        } catch (error) {
+          console.log("error>>>", error);
+          setLoading(false);
+        }
+      }
+      // if (data.promptGetOne.storyline[0].proposedNodes) {
+      //   console.log("nodes found");
+      //   const nodeIDs = data.promptGetOne.storyline[0].proposedNodes;
+      //   const nodeURL = `https://and-then-backend.herokuapp.com/node/multi/${nodeIDs}/`;
+      //   try {
+      //     const responseNode = await fetch(nodeURL);
+      //     const dataNode = await responseNode.json();
+      //     console.log(dataNode);
+      //     setProposedNodes(dataNode);
+      //     setLoading(false);
+      //   } catch (error) {
+      //     console.log("error>>>", error);
+      //     setLoading(false);
+      //   }
+      // }
     } catch (error) {
       console.log("error>>>", error);
       setLoading(false);
@@ -94,7 +150,7 @@ const PromptPage = () => {
 
   useEffect(() => {
     promptAPICall();
-   //setScroll({ y: 0 });
+    //setScroll({ y: 0 });
   }, []);
 
   return (
@@ -114,7 +170,8 @@ const PromptPage = () => {
               style={{ width: "100%", margin: "auto" }}
               src={payload.bannerURL}
               radius="lg"
-              height={400}
+              height={450}
+              withPlaceholder
               alt="banner image"
             />
             <Space h="20px" />
@@ -146,13 +203,13 @@ const PromptPage = () => {
                 </Badge>
               </Group>
 
-              <Text>Prompt Owner: UserTest1</Text>
+              <Text>Prompt Owner: {payload.owner}</Text>
             </Group>
             <Space h="10px" />
             <Group position="apart">
               <Group>
-                <Text>Followers: 100</Text>
-                <Text>Nodes: 3</Text>
+                <Text>Followers: {payload.followers.length}</Text>
+                <Text>Nodes: {payload.storyline[0].storyNodes.length}</Text>
               </Group>
 
               <Text>
@@ -203,7 +260,9 @@ const PromptPage = () => {
             </Group>
             <Collapse in={collapsePrompt}>
               <Space h="20px" />
-              <Text style={{ whiteSpace: "pre-line" }}>{payload.promptText}</Text>
+              <Text style={{ whiteSpace: "pre-line" }}>
+                {payload.promptText}
+              </Text>
             </Collapse>
             <Space h="20px" />
             <Button
@@ -215,21 +274,24 @@ const PromptPage = () => {
             </Button>
             <Collapse in={collapseInfo}>
               <Space h="20px" />
-              <Text style={{ whiteSpace: "pre-line" }}>{payload.additionalInfo}</Text>
+              <Text style={{ whiteSpace: "pre-line" }}>
+                {payload.additionalInfo}
+              </Text>
             </Collapse>
             <Space h="20px" />
             <Divider />
+            {/* <StoryNode />
             <StoryNode />
             <StoryNode />
-            <StoryNode />
-            <StoryNode />
+            <StoryNode /> */}
+            {storyNodesMapped}
             <Divider />
             <Space h="20px" />
             <Title order={2}>And Then...</Title>
             <Carousel
               showThumbs={false}
               centerMode={true}
-              centerSlidePercentage={98}
+              centerSlidePercentage={99}
               style={{ color: "red" }}
               showArrows={true}
               showStatus={false}
@@ -237,6 +299,17 @@ const PromptPage = () => {
               useKeyboardArrows={true}
             >
               <div style={{ margin: "8px" }}>
+                <Image
+                  src={"bannerURL"}
+                  height={160}
+                  alt="banner image"
+                  withPlaceholder
+                />
+              </div>
+              
+
+              {proposedNodesMapped}
+              {/* <div style={{ margin: "8px" }}>
                 <StoryNode canApprove={true} canEdit={true} />
               </div>
               <div style={{ margin: "8px" }}>
@@ -247,7 +320,7 @@ const PromptPage = () => {
               </div>
               <div style={{ margin: "8px" }}>
                 <StoryNode canApprove={true} canEdit={true} />
-              </div>
+              </div> */}
             </Carousel>
           </div>
           <Group position="center">

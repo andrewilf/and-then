@@ -23,6 +23,7 @@ const CreatePromptPage = () => {
   const notifications = useNotifications();
   const navigate = useNavigate();
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
+  const [loading, setLoading] = useState(false);
   // const [bannerImages, setBannerImages] = useState([]);
   const form = useForm({
     initialValues: {
@@ -32,7 +33,7 @@ const CreatePromptPage = () => {
       rating: "",
       genre: "",
       bannerURL:
-        "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
+        "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     },
     validationRules: {
       title: (value) => value.trim().length >= 3,
@@ -54,6 +55,7 @@ const CreatePromptPage = () => {
   // );
 
   const createPrompt = async (payload) => {
+    setLoading(true);
     try {
       const response = await fetch(
         "https://and-then-backend.herokuapp.com/prompt/withstoryline",
@@ -68,20 +70,26 @@ const CreatePromptPage = () => {
       );
       const data = await response.json();
       console.log(data);
-         notifications.showNotification({
-                title: "Prompt created",
-                message: "Hey there, your prompt is now public!",
-                color: "green",
-                //  style: { backgroundColor: "red" },
-              });
-      navigate("/prompts")
+      notifications.showNotification({
+        title: "Prompt created",
+        message: "Hey there, your prompt is now public!",
+        color: "green",
+        //  style: { backgroundColor: "red" },
+      });
+      setLoading(false);
+      navigate("/prompts");
     } catch (error) {
+      setLoading(false);
       console.log("prompt creation failed");
     }
   };
 
   useEffect(() => {
     console.log("start load");
+    // console.log("login status: ", loggedIn, localStorage.getItem("token"))
+    if (!localStorage.getItem("token")) {
+      navigate("/signin");
+    }
   }, []);
 
   return (
@@ -211,22 +219,63 @@ const CreatePromptPage = () => {
                 data={[
                   {
                     value:
-                      "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
-                    label: "Norway",
+                      "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Light shining on Book",
                   },
                   {
                     value:
-                      "https://imageio.forbes.com/specials-images/imageserve/1026205392/Beautiful-luxury-home-exterior-at-twilight/960x0.jpg?fit=bounds&format=jpg&width=960",
-                    label: "House",
+                      "https://images.pexels.com/photos/1165982/pexels-photo-1165982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Tree tunnel",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/109998/pexels-photo-109998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Neon sign",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/427900/pexels-photo-427900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Person looking at moon",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "City in the clouds",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/5952651/pexels-photo-5952651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Man in hoodie",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "City at night",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/316080/pexels-photo-316080.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Dreary ballroom",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/776647/pexels-photo-776647.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Rose on wooden surface",
+                  },
+                  {
+                    value:
+                      "https://images.pexels.com/photos/907485/pexels-photo-907485.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                    label: "Pink sky",
                   },
                 ]}
               />
             </InputWrapper>
             <Image
               src={form.values.bannerURL}
-              height={160}
+              height={290}
               alt="banner image"
               radius={"md"}
+              withPlaceholder
             />
           </Group>
         </Group>
@@ -236,15 +285,8 @@ const CreatePromptPage = () => {
             radius="xl"
             color="dark"
             size="xl"
+            disabled={loading}
             type="submit"
-            // onClick={() => {
-            //   notifications.showNotification({
-            //     title: "Prompt created",
-            //     message: "Hey there, your prompt is now public!",
-            //     color: "green",
-            //     //  style: { backgroundColor: "red" },
-            //   });
-            // }}
           >
             Publish prompt
           </Button>

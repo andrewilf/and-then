@@ -1,12 +1,15 @@
 import { Text, Group, Button } from "@mantine/core";
 import { CheckIcon, Cross2Icon, Pencil1Icon } from "@modulz/radix-icons";
 import parse from "html-react-parser";
+import { parseISO } from "date-fns";
 
 const StoryNode = (props) => {
-  const htmlText = "<p>Your initial <strong>html value</strong> or an empty string to init editor without value</p><p>asdasdasdt editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valu</p>"
+  const htmlText =
+    "<p>Your initial <strong>html value</strong> or an empty string to init editor without value</p><p>asdasdasdt editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valut editor without valu</p>";
   const stringText =
     "testtesttesttesttesttesttesttesttesttesttesttesttesttesttestte sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte  sttesttestte sttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest test";
-  return (
+  
+    return (
     <div
       style={{
         marginTop: "20px",
@@ -18,13 +21,18 @@ const StoryNode = (props) => {
       }}
     >
       <Text color="white" align="right">
-        TestUser2
+        {props.author}
       </Text>
       <Text color="white" align="right">
-        last edited: 13 Jan 2021
+        last edited:{" "}
+        {parseISO(props.updatedAt).toLocaleDateString("en-SG", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
       </Text>
       <Text align="left" style={{ whiteSpace: "pre-line" }}>
-        {parse(htmlText)}
+        {parse(props.text)}
       </Text>
       <Group spacing="5px" position="right">
         {props.canEdit ? (

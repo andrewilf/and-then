@@ -8,6 +8,7 @@ import {
   Pagination,
   Center,
   Divider,
+  Text,
 } from "@mantine/core";
 import PromptCard from "./PromptCard";
 import SelectTags from "./SelectTags";
@@ -77,14 +78,21 @@ const AllPromptsPage = () => {
       status={element.status}
       bannerURL={element.bannerURL}
       promptText={element.promptText}
-      // nodeCount={element.storyline[0].storyNodes.length}
-      // followerCount={element.storyline[0].followers.length}
+      nodeCount={element.storyline[0].storyNodes.length}
+      followerCount={element.followers.length}
     />
   ));
 
   useEffect(async () => {
-    promptAPICall(activePage);
-  }, [activePage]);
+    let isMounted = true;
+    if (isMounted) {
+      setScroll({ y: 0 });
+      promptAPICall(activePage);
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [activePage, genreSelect, ratingSelect, statusSelect]);
 
   return (
     <div style={{ padding: "5% 5% 3% 5%" }}>
@@ -173,7 +181,7 @@ const AllPromptsPage = () => {
           page={activePage}
           onChange={(page) => {
             setActivePage(page);
-            setScroll({ y: 0 });
+            //  setScroll({ y: 0 });
             console.log(page);
           }}
         />
@@ -181,6 +189,11 @@ const AllPromptsPage = () => {
       <Space h="40px" />
       <Group position="center">
         {loading ? <Loader color="gray" variant="dots" /> : allPromptCards}
+        {allPromptCards.length === 0 && !loading ? (
+          <Text>No prompt found</Text>
+        ) : (
+          ""
+        )}
       </Group>
       <Space h="40px" />
       <Center>
@@ -191,7 +204,7 @@ const AllPromptsPage = () => {
           page={activePage}
           onChange={(page) => {
             setActivePage(page);
-            setScroll({ y: 0 });
+            // setScroll({ y: 0 });
             console.log(page);
           }}
         />

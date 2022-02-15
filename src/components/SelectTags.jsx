@@ -1,4 +1,5 @@
 import { Chips, Chip, useMantineTheme } from "@mantine/core";
+import { useEffect } from "react";
 
 const SelectTags = (props) => {
   const theme = useMantineTheme();
@@ -6,6 +7,9 @@ const SelectTags = (props) => {
   const ChipsForTags = tags.map((element) => (
     <Chip key={element} value={element}>{element}</Chip>
   ));
+  // useEffect(()=>{
+  //   props.onClick()
+  // },[value])
   return (
     <div>
       <Chips

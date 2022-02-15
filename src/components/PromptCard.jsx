@@ -50,7 +50,7 @@ const PromptCard = (props) => {
         return "gray";
     }
   };
-  //console.log("my id is: ", props._id)
+  //console.log(props.nodeCount)
   return (
     <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}>
       <Card
@@ -62,7 +62,12 @@ const PromptCard = (props) => {
         withBorder={true}
       >
         <Card.Section>
-          <Image src={props.bannerURL} height={160} alt="banner image" />
+          <Image
+            src={props.bannerURL}
+            height={160}
+            alt="banner image"
+            withPlaceholder
+          />
         </Card.Section>
 
         <Group
@@ -80,8 +85,8 @@ const PromptCard = (props) => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text size="xs">Followers: {props.followerCount || "-"}</Text>
-          <Text size="xs">Nodes: {props.nodeCount || "-"}</Text>
+          <Text size="xs">Followers: {props.followerCount || "0"}</Text>
+          <Text size="xs">Nodes: {props.nodeCount || "0"}</Text>
           <Badge color={genreColor(props.genre)} variant="outline">
             {props.genre}
           </Badge>
@@ -109,7 +114,7 @@ const PromptCard = (props) => {
         {/* <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5,  height: "70px"}}> */}
         <ScrollArea style={{ height: 90 }} offsetScrollbars>
           {props.promptText}
-          </ScrollArea>
+        </ScrollArea>
         {/* </Text> */}
       </Card>
     </div>
