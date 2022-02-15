@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Title,
   Space,
@@ -10,15 +10,20 @@ import {
   Select,
   Image,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SelectTags from "./SelectTags";
 import { ArrowLeftIcon } from "@modulz/radix-icons";
 import { useNotifications } from "@mantine/notifications";
+import { LoginContext, adminContext, userContext } from "../global/context";
 import { useForm } from "@mantine/hooks";
 const CreatePromptPage = () => {
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const { admin, setAdmin } = useContext(adminContext);
+  const { user, setUser } = useContext(userContext);
   const notifications = useNotifications();
+  const navigate = useNavigate();
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");
-  const [bannerImages, setBannerImages] = useState([]);
+  // const [bannerImages, setBannerImages] = useState([]);
   const form = useForm({
     initialValues: {
       title: "",
@@ -30,12 +35,12 @@ const CreatePromptPage = () => {
         "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
     },
     validationRules: {
-      title: (value) => value.trim().length >= 2,
-      promptText: (value) => value.trim().length >= 2,
+      title: (value) => value.trim().length >= 3,
+      promptText: (value) => value.trim().length >= 3,
     },
     errorMessages: {
-      title: "Title must include at least 2 letters",
-      promptText: "Prompt must include at least 2 letters",
+      title: "Title must be at least 3 characters long",
+      promptText: "Prompt must be at least 3 letters long",
     },
   });
 
@@ -47,24 +52,36 @@ const CreatePromptPage = () => {
   // const [imageURL, setimageURL] = useState(
   //   "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
   // );
-  const bannerAPICall = async () => {
-    let baseURL = `https://and-then-backend.herokuapp.com/banner/all`;
-    console.log(baseURL);
+
+  const createPrompt = async (payload) => {
     try {
-      const response = await fetch(baseURL);
+      const response = await fetch(
+        "https://and-then-backend.herokuapp.com/prompt/withstoryline",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("token"),
+          },
+          body: JSON.stringify(payload),
+        }
+      );
       const data = await response.json();
-      const bannerMapped = data.map((element) => {
-        return { label: "element", value: `https://and-then-backend.herokuapp.com/banner/${element}` };
-      });
-      console.log(bannerMapped);
-      setBannerImages(bannerMapped);
+      console.log(data);
+         notifications.showNotification({
+                title: "Prompt created",
+                message: "Hey there, your prompt is now public!",
+                color: "green",
+                //  style: { backgroundColor: "red" },
+              });
+      navigate("/prompts")
     } catch (error) {
-      console.log("error>>>", error);
+      console.log("prompt creation failed");
     }
   };
+
   useEffect(() => {
     console.log("start load");
-   // bannerAPICall();
   }, []);
 
   return (
@@ -86,8 +103,10 @@ const CreatePromptPage = () => {
         onSubmit={form.onSubmit((values) => {
           values.genre = genreSelect;
           values.rating = ratingSelect;
+          values.owner = user._id;
           // form.validate();
           console.log(values);
+          createPrompt(values);
         })}
       >
         <Group direction="column" grow>

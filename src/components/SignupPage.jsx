@@ -79,7 +79,7 @@ const SignupPage = (props) => {
           </InputWrapper>
         </Group>
       </Group>
-      <Space h="10px" />
+      <Space h="15px" />
       <Group position="apart">
         <Anchor
           size="xs"

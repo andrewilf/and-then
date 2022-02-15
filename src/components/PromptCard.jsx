@@ -50,12 +50,12 @@ const PromptCard = (props) => {
         return "gray";
     }
   };
-
+  //console.log("my id is: ", props._id)
   return (
     <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}>
       <Card
         component={Link}
-        to="/prompt"
+        to={`/prompt/${props._id}`}
         shadow="sm"
         padding="lg"
         radius="lg"

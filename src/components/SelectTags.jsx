@@ -4,7 +4,7 @@ const SelectTags = (props) => {
   const theme = useMantineTheme();
   const tags = (props.tags?props.tags: [""])
   const ChipsForTags = tags.map((element) => (
-    <Chip value={element}>{element}</Chip>
+    <Chip key={element} value={element}>{element}</Chip>
   ));
   return (
     <div>

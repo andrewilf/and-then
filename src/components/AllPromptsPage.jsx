@@ -68,6 +68,8 @@ const AllPromptsPage = () => {
 
   const allPromptCards = promptsDisplay["docs"].map((element) => (
     <PromptCard
+      key={element._id}
+      _id={element._id}
       title={element.title}
       rating={element.rating}
       genre={element.genre}

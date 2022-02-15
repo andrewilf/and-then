@@ -64,7 +64,7 @@ const SigninPage = (props) => {
       setAdmin(false);
       setUser(false);
       setLoggedIn(false);
-      setError("Invalid Login");
+      setError("Invalid login");
     }
 
     // else {
@@ -107,6 +107,7 @@ const SigninPage = (props) => {
               id="input-email"
               placeholder="Your email"
               icon={<EnvelopeOpenIcon />}
+              onFocus={()=> {setError("")}}
               {...form.getInputProps("email")}
             />
           </InputWrapper>
@@ -121,11 +122,12 @@ const SigninPage = (props) => {
               id="input-password"
               icon={<LockClosedIcon />}
               placeholder="Your password"
+              onFocus={()=> {setError("")}}
               {...form.getInputProps("password")}
             />
           </InputWrapper>
         </Group>
-        <Space h="10px" />
+        <Space h="15px" />
         <Group position="apart">
           <Anchor
             size="xs"

@@ -44,17 +44,17 @@ function App() {
   const checkLogin = async () => {
     if (accessToken) {
       //  navigate("/signin");
-      const response = await fetch(
-        "https://and-then-backend.herokuapp.com/session/login",
-        {
-          method: "GET",
-          headers: {
-            "x-access-token": accessToken,
-          },
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
+      try {
+        const response = await fetch(
+          "https://and-then-backend.herokuapp.com/session/login",
+          {
+            method: "GET",
+            headers: {
+              "x-access-token": accessToken,
+            },
+          }
+        );
+        const data = await response.json();
         const userDetails = {
           _id: data._id,
           role: data.role,
@@ -67,11 +67,12 @@ function App() {
         } else {
           setAdmin(false);
         }
-      } else {
+      } catch {
         console.log("token failed");
         setAdmin(false);
         setUser(false);
         setLoggedIn(false);
+        navigate("iamnew");
       }
     } else {
       navigate("iamnew");
@@ -120,7 +121,7 @@ function App() {
               <Route path="/prompts" element={<AllPromptsPage />} />
               <Route path="/iamnew" element={<NewPage />} />
               <Route path="/createnode" element={<CreateNodePage />} />
-              <Route path="/prompt" element={<PromptPage />} />
+              <Route path="/prompt/:promptID" element={<PromptPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route
                 path="/signin"
