@@ -10,6 +10,7 @@ import {
   Collapse,
   Badge,
   Loader,
+  Card,
 } from "@mantine/core";
 import { parseISO } from "date-fns";
 import { Link, useParams } from "react-router-dom";
@@ -41,6 +42,7 @@ const PromptPage = () => {
       <StoryNode
         canApprove={true}
         canEdit={true}
+        _id={element._id}
         key={element._id}
         text={element.text}
         author={element.author}
@@ -57,7 +59,7 @@ const PromptPage = () => {
     promptText: "",
     rating: "",
     username: "",
-    storyline: [{ storyNodes: [] }],
+    storyline: [{ storyNodes: [], proposedNodes: [] }],
     status: "",
     createdAt: "",
     updatedAt: "",
@@ -102,46 +104,47 @@ const PromptPage = () => {
     }
   };
 
-  const promptAPICall = async (page) => {
+  const promptAPICall = async () => {
     setLoading(true);
     const baseURL = `https://and-then-backend.herokuapp.com/prompt/${promptID}/`;
     try {
       const response = await fetch(baseURL);
       const data = await response.json();
       console.log(data);
-      data.promptGetOne.owner = data.username;
-      setPayload(data.promptGetOne);
+      //data.owner = data.username;
+      setPayload(data);
 
-      if (data.promptGetOne.storyline[0].storyNodes) {
-        console.log("nodes found");
-        const nodeIDs = data.promptGetOne.storyline[0].storyNodes;
-        const nodeURL = `https://and-then-backend.herokuapp.com/node/multi/${nodeIDs}/`;
+      if (data.storyline[0].storyNodes.length !== 0) {
+        console.log("story nodes found");
+        const nodeIDs = data.storyline[0].storyNodes;
+        const nodeURL = `https://and-then-backend.herokuapp.com/node/multi/${nodeIDs}`;
         try {
           const responseNode = await fetch(nodeURL);
           const dataNode = await responseNode.json();
           console.log(dataNode);
           setStoryNodes(dataNode);
-           setLoading(false);
+          //setLoading(false);
         } catch (error) {
           console.log("error>>>", error);
           setLoading(false);
         }
       }
-      // if (data.promptGetOne.storyline[0].proposedNodes) {
-      //   console.log("nodes found");
-      //   const nodeIDs = data.promptGetOne.storyline[0].proposedNodes;
-      //   const nodeURL = `https://and-then-backend.herokuapp.com/node/multi/${nodeIDs}/`;
-      //   try {
-      //     const responseNode = await fetch(nodeURL);
-      //     const dataNode = await responseNode.json();
-      //     console.log(dataNode);
-      //     setProposedNodes(dataNode);
-      //     setLoading(false);
-      //   } catch (error) {
-      //     console.log("error>>>", error);
-      //     setLoading(false);
-      //   }
-      // }
+      if (data.storyline[0].proposedNodes.length !== 0) {
+        console.log("proposed nodes found");
+        const nodeIDs = data.storyline[0].proposedNodes;
+        const nodeURL = `https://and-then-backend.herokuapp.com/node/multi/${nodeIDs}`;
+        try {
+          const responseNode = await fetch(nodeURL);
+          const dataNode = await responseNode.json();
+          console.log(dataNode);
+          setProposedNodes(dataNode);
+          // setLoading(false);
+        } catch (error) {
+          console.log("error>>>", error);
+          setLoading(false);
+        }
+      }
+      setLoading(false);
     } catch (error) {
       console.log("error>>>", error);
       setLoading(false);
@@ -203,7 +206,7 @@ const PromptPage = () => {
                 </Badge>
               </Group>
 
-              <Text>Prompt Owner: {payload.owner}</Text>
+              <Text>Prompt Owner: {payload.username}</Text>
             </Group>
             <Space h="10px" />
             <Group position="apart">
@@ -287,46 +290,52 @@ const PromptPage = () => {
             {storyNodesMapped}
             <Divider />
             <Space h="20px" />
-            <Title order={2}>And Then...</Title>
+            <Title order={2}>Possible suggestions</Title>
             <Carousel
               showThumbs={false}
               centerMode={true}
-              centerSlidePercentage={99}
+              centerSlidePercentage={100 - proposedNodesMapped.length}
               style={{ color: "red" }}
               showArrows={true}
               showStatus={false}
               infiniteLoop={true}
               useKeyboardArrows={true}
             >
-              <div style={{ margin: "8px" }}>
-                <Image
-                  src={"bannerURL"}
-                  height={160}
-                  alt="banner image"
-                  withPlaceholder
-                />
-              </div>
-              
-
               {proposedNodesMapped}
-              {/* <div style={{ margin: "8px" }}>
-                <StoryNode canApprove={true} canEdit={true} />
-              </div>
-              <div style={{ margin: "8px" }}>
-                <StoryNode canApprove={true} canEdit={true} />
-              </div>
-              <div style={{ margin: "8px" }}>
-                <StoryNode canApprove={true} canEdit={true} />
-              </div>
-              <div style={{ margin: "8px" }}>
-                <StoryNode canApprove={true} canEdit={true} />
-              </div> */}
             </Carousel>
+            {proposedNodesMapped.length == 0 ? (
+              <div
+                style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}
+              >
+                <Card shadow="sm" padding="lg" radius="lg" withBorder={true}>
+                  <Card.Section>
+                    <Image
+                      src={payload.bannerURL}
+                      height={160}
+                      alt="banner image"
+                      withPlaceholder
+                    />
+                  </Card.Section>
+                  <Group
+                    position="apart"
+                    style={{ marginBottom: 5, marginTop: 2 }}
+                  >
+                    <Title order={2} weight={700}>
+                      No other suggestions
+                    </Title>
+                  </Group>
+                  <Space h="10px" />
+                  Contribute and play a part in the story's creation.
+                </Card>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <Group position="center">
             <Button
               component={Link}
-              to="/createnode"
+              to={`/createnode/${promptID}/${payload.storyline[0]._id}`}
               radius="md"
               size="xl"
               color="dark"

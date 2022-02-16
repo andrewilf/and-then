@@ -121,7 +121,7 @@ function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/prompts" element={<AllPromptsPage />} />
               <Route path="/iamnew" element={<NewPage />} />
-              <Route path="/createnode" element={<CreateNodePage />} />
+              <Route path="/createnode/:promptID/:storylineID" element={<CreateNodePage />} />
               <Route path="/prompt/:promptID" element={<PromptPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route

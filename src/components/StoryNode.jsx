@@ -17,13 +17,14 @@ const StoryNode = (props) => {
         padding: "0.5% 1% 1% 2%",
         backgroundColor: "gray",
         borderRadius: "8px",
+        opacity: "80%",
         color: "black",
       }}
     >
-      <Text color="white" align="right">
+      <Text color="black" align="right">
         {props.author}
       </Text>
-      <Text color="white" align="right">
+      <Text color="black" align="right">
         last edited:{" "}
         {parseISO(props.updatedAt).toLocaleDateString("en-SG", {
           year: "numeric",
