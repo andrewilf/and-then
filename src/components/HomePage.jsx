@@ -1,8 +1,15 @@
 import { Title, Space, Group } from "@mantine/core";
 import PromptCard from "./PromptCard";
 import { Carousel } from "react-responsive-carousel";
+import { useWindowScroll } from "@mantine/hooks";
+import { useEffect } from "react";
 const HomePage = (props) => {
   const carouselWidth = 100 / 3;
+  const [scroll, setScroll] = useWindowScroll();
+
+  useEffect(() => {
+    setScroll({ y: 0 });
+  }, []);
   return (
     <div style={{ padding: "5% 5% 5% 5%", margin: "auto" }}>
       {props.loggedIn ? (

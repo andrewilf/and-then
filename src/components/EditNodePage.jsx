@@ -8,18 +8,17 @@ import { LoginContext, adminContext, userContext } from "../global/context";
 import { useNotifications } from "@mantine/notifications";
 import { useModals } from "@mantine/modals";
 
-const CreateNodePage = () => {
+const EditNodePage = () => {
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
   const notifications = useNotifications();
   const modals = useModals();
 
-  const { promptID, storylineID } = useParams();
-  // const initialValue =
-  //   "<p>Your initial <b>html value</b> or an empty string to init editor without value</p>";
-  const [value, onChange] = useState("");
-  //  const [display, setDisplay] = useState("");
+  const { nodeID, storylineID, promptID } = useParams();
+  
+  const [nodeText, setNodeText] = useState("");
+  
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -63,21 +62,24 @@ const CreateNodePage = () => {
         console.log("Confirmed");
         modals.closeModal();
         submitNode({
-          author: user._id,
           text: value,
-          prompt: promptID,
-          storyline: storylineID,
         });
       },
     });
   const promptAPICall = async () => {
     setLoading(true);
-    const baseURL = `https://and-then-backend.herokuapp.com/prompt/${promptID}/`;
+    const promptURL = `https://and-then-backend.herokuapp.com/prompt/${promptID}/`;
+    const nodeURL = `https://and-then-backend.herokuapp.com/node/${nodeID}/`;
     try {
-      const response = await fetch(baseURL);
-      const data = await response.json();
-      console.log(data);
-      setPromptDetails(data);
+      const responsePrompt = await fetch(promptURL);
+      const dataPrompt = await responsePrompt.json();
+      console.log(dataPrompt);
+      setPromptDetails(dataPrompt);
+      const responseNode = await fetch(nodeURL);
+      const dataNode = await responseNode.json();
+      console.log(dataPrompt, dataNode);
+      setPromptDetails(dataPrompt);
+      setNodeText(dataNode.text)
       setLoading(false);
     } catch (error) {
       console.log("error>>>", error);
@@ -85,11 +87,12 @@ const CreateNodePage = () => {
     }
   };
 
+
   const submitNode = async (payload) => {
-    const baseURL = `https://and-then-backend.herokuapp.com/node/proposenode`;
+    const baseURL = `https://and-then-backend.herokuapp.com/node/${nodeID}`;
     try {
       const response = await fetch(baseURL, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "x-access-token": localStorage.getItem("token"),
@@ -101,8 +104,8 @@ const CreateNodePage = () => {
       setSubmitting(false);
       notifications.showNotification({
         title: "Node suggested",
-        message: "Hey there, your suggested node is now public!",
-        color: "green",
+        message: "Hey there, your suggested node has been edited!",
+        color: "blue",
         //  style: { backgroundColor: "red" },
       });
       navigate(`/prompt/${promptID}`);
@@ -124,7 +127,7 @@ const CreateNodePage = () => {
       {!loading ? (
         <div>
           <Title order={1} align="center">
-            Creating node for: {promptDetails.title}
+            Editing node for: {promptDetails.title}
           </Title>
           <Button
             //          radius="xl"
@@ -138,8 +141,8 @@ const CreateNodePage = () => {
           </Button>
           <Space h="20px" />
           <RichTextEditor
-            value={value}
-            onChange={onChange}
+            value={nodeText}
+            onChange={setNodeText}
             controls={[
               ["bold", "italic", "underline", "clean"],
               ["unorderedList", "orderedList", "blockquote"],
@@ -157,14 +160,14 @@ const CreateNodePage = () => {
               disabled={submitting}
               onClick={() => {
                 setSubmitting(true);
-                console.log(value);
+                //console.log(value);
                 //const change = value.replace(" class=", " className=")
                 //console.log(change)
                 // setDisplay(value);
-                openConfirmModal(value);
+                openConfirmModal(nodeText);
               }}
             >
-              Submit node
+              Edit node
             </Button>
           </Group>
 
@@ -181,4 +184,4 @@ const CreateNodePage = () => {
   );
 };
 
-export default CreateNodePage;
+export default EditNodePage;

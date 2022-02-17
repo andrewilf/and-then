@@ -16,6 +16,7 @@ import SignupPage from "./components/SignupPage";
 import SigninPage from "./components/SigninPage";
 import CreatePromptPage from "./components/CreatePromptPage";
 import EditPromptPage from "./components/EditPromptPage";
+import EditNodePage from "./components/EditNodePage";
 import { LoginContext, adminContext, userContext } from "./global/context";
 
 function App() {
@@ -122,6 +123,7 @@ function App() {
               <Route path="/prompts" element={<AllPromptsPage />} />
               <Route path="/iamnew" element={<NewPage />} />
               <Route path="/createnode/:promptID/:storylineID" element={<CreateNodePage />} />
+              <Route path="/editnode/:promptID/:storylineID/:nodeID" element={<EditNodePage />} />
               <Route path="/prompt/:promptID" element={<PromptPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route
@@ -133,7 +135,8 @@ function App() {
                 element={<SignupPage quote={quote} quoteAuthor={quoteAuthor} />}
               />
               <Route path="/createprompt" element={<CreatePromptPage />} />
-              <Route path="/editprompt" element={<EditPromptPage />} />
+              <Route path="/editprompt/:promptID" element={<EditPromptPage />} />
+              
             </Routes>
             <Footer />
           </AppShell>

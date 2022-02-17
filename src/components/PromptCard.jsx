@@ -12,44 +12,13 @@ import {
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { parseISO } from "date-fns";
+import variousVariables from "./variousVariables";
 
 const PromptCard = (props) => {
   const theme = useMantineTheme();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
-  const ratingColor = {
-    Mature: "violet",
-    Teen: "orange",
-    Everyone: "blue",
-  };
-  const statusColor = {
-    Completed: "green",
-    Ongoing: "yellow",
-  };
-  const genreColor = (genre) => {
-    switch (genre) {
-      case "Fantasy":
-        return "green";
-      case "Thriller":
-        return "grape";
-      case "Adventure":
-        return "indigo";
-      case "Historical":
-        return "orange";
-      case "SciFi":
-        return "yellow";
-      case "Horror":
-        return "teal";
-      case "Romance":
-        return "red";
-      case "FanFiction":
-        return "lime";
-      case "Others":
-        return "gray";
-      default:
-        return "gray";
-    }
-  };
+  
   //console.log(props.nodeCount)
   return (
     <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}>
@@ -77,7 +46,7 @@ const PromptCard = (props) => {
           <Title order={2} weight={700}>
             {props.title}
           </Title>
-          <Badge color={ratingColor[props.rating]} variant="light">
+          <Badge color={variousVariables.ratingColor[props.rating]} variant="light">
             {props.rating}
           </Badge>
         </Group>
@@ -87,7 +56,7 @@ const PromptCard = (props) => {
         >
           <Text size="xs">Followers: {props.followerCount || "0"}</Text>
           <Text size="xs">Nodes: {props.nodeCount || "0"}</Text>
-          <Badge color={genreColor(props.genre)} variant="outline">
+          <Badge color={variousVariables.genreColor(props.genre)} variant="outline">
             {props.genre}
           </Badge>
         </Group>
@@ -101,7 +70,7 @@ const PromptCard = (props) => {
               day: "numeric",
             })}
           </Text>
-          <Badge color={statusColor[props.status]} variant="dot" radius="xl">
+          <Badge color={variousVariables.statusColor[props.status]} variant="dot" radius="xl">
             {props.status}
           </Badge>
         </Group>

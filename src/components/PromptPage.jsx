@@ -14,42 +14,16 @@ import {
 } from "@mantine/core";
 import { parseISO } from "date-fns";
 import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import StoryNode from "./StoryNode";
 import { Carousel } from "react-responsive-carousel";
 import { useWindowScroll } from "@mantine/hooks";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Pencil1Icon } from "@modulz/radix-icons";
+import { LoginContext, adminContext, userContext } from "../global/context";
+import variousVariables from "./variousVariables";
 
 const PromptPage = () => {
-  const [scroll, setScroll] = useWindowScroll();
-  const { promptID } = useParams();
-  const [collapsePrompt, setcollapsePrompt] = useState(false);
-  const [collapseInfo, setCollapseInfo] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [storyNodes, setStoryNodes] = useState([]);
-  const [proposedNodes, setProposedNodes] = useState([]);
-  const storyNodesMapped = storyNodes.map((element) => (
-    <StoryNode
-      key={element._id}
-      text={element.text}
-      author={element.author}
-      updatedAt={element.updatedAt}
-    />
-  ));
-  const proposedNodesMapped = proposedNodes.map((element) => (
-    <div style={{ margin: "8px" }}>
-      <StoryNode
-        canApprove={true}
-        canEdit={true}
-        _id={element._id}
-        key={element._id}
-        text={element.text}
-        author={element.author}
-        updatedAt={element.updatedAt}
-      />
-    </div>
-  ));
   const [payload, setPayload] = useState({
     additionalInfo: "",
     bannerURL: "",
@@ -65,44 +39,40 @@ const PromptPage = () => {
     updatedAt: "",
     followers: [],
   });
-  const prompt =
-    "One day a boys destiny changed forever after a letter from his estranged uncle arrived. \nIt contained a check for one million dollars with a bloody note saying: “spend it well and hide”";
-  const additionalInfo =
-    " Serious nodes only, 1st Person view only. \nAdding Weekly, Fridays 9pm SGT Planning to maybe end in 50 nodes. \nNothing too graphic, 12 - 17 year old target audience \nDiscord channel for Discussions: https://www.invitelegit.com";
-
-  const ratingColor = {
-    Mature: "violet",
-    Teen: "orange",
-    Everyone: "blue",
-  };
-  const statusColor = {
-    Completed: "green",
-    Ongoing: "yellow",
-  };
-  const genreColor = (genre) => {
-    switch (genre) {
-      case "Fantasy":
-        return "green";
-      case "Thriller":
-        return "grape";
-      case "Adventure":
-        return "indigo";
-      case "Historical":
-        return "orange";
-      case "SciFi":
-        return "yellow";
-      case "Horror":
-        return "teal";
-      case "Romance":
-        return "red";
-      case "FanFiction":
-        return "lime";
-      case "Others":
-        return "gray";
-      default:
-        return "gray";
-    }
-  };
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const { admin, setAdmin } = useContext(adminContext);
+  const { user, setUser } = useContext(userContext);
+  const [scroll, setScroll] = useWindowScroll();
+  const { promptID } = useParams();
+  const [collapsePrompt, setcollapsePrompt] = useState(false);
+  const [follow, setFollow] = useState(false);
+  const [collapseInfo, setCollapseInfo] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [storyNodes, setStoryNodes] = useState([]);
+  const [proposedNodes, setProposedNodes] = useState([]);
+  const storyNodesMapped = storyNodes.map((element) => (
+    <StoryNode
+      key={element._id + "-sn"}
+      text={element.text}
+      author={element.author}
+      updatedAt={element.updatedAt}
+    />
+  ));
+  const proposedNodesMapped = proposedNodes.map((element) => (
+    <div key={Math.random()} style={{ margin: "8px" }}>
+      <StoryNode
+        key={element._id + "proposed"}
+        canApprove={user._id === payload.owner ? true : false}
+        canEdit={element.authorID === user._id ? true : false}
+        _id={element._id}
+        text={element.text}
+        author={element.author}
+        updatedAt={element.updatedAt}
+        storyline={payload.storyline[0]._id}
+        promptID={promptID}
+      />
+    </div>
+  ));
 
   const promptAPICall = async () => {
     setLoading(true);
@@ -113,6 +83,10 @@ const PromptPage = () => {
       console.log(data);
       //data.owner = data.username;
       setPayload(data);
+      console.log((data.followers.find((element) => element == user._id) === user._id), user)
+      setFollow(
+        ((data.followers.find((element) => element == user._id) === user._id) ? true : false)
+      );
 
       if (data.storyline[0].storyNodes.length !== 0) {
         console.log("story nodes found");
@@ -151,10 +125,29 @@ const PromptPage = () => {
     }
   };
 
+  const followAPICall = async (value) => {
+    const baseURL = `https://and-then-backend.herokuapp.com/prompt/follow/${promptID}/`;
+    try {
+      const response = await fetch(baseURL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ userID: user._id, followStatus: value }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log("error>>>", error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     promptAPICall();
     //setScroll({ y: 0 });
-  }, []);
+  }, [user]);
 
   return (
     <div
@@ -181,7 +174,7 @@ const PromptPage = () => {
             <Group position="apart">
               <Group>
                 <Badge
-                  color={ratingColor[payload.rating]}
+                  color={variousVariables.ratingColor[payload.rating]}
                   variant="light"
                   radius="xl"
                   size="lg"
@@ -189,7 +182,7 @@ const PromptPage = () => {
                   {payload.rating}
                 </Badge>
                 <Badge
-                  color={genreColor(payload.genre)}
+                  color={variousVariables.genreColor(payload.genre)}
                   variant="outline"
                   radius="xl"
                   size="lg"
@@ -197,7 +190,7 @@ const PromptPage = () => {
                   {payload.genre}
                 </Badge>
                 <Badge
-                  color={statusColor[payload.status]}
+                  color={variousVariables.statusColor[payload.status]}
                   variant="dot"
                   radius="xl"
                   size="lg"
@@ -225,14 +218,24 @@ const PromptPage = () => {
               </Text>
             </Group>
             <Group position="apart">
-              <Switch
-                size="md"
-                label="Follow"
-                color="green"
-                styles={{
-                  input: { backgroundColor: "gray" },
-                }}
-              />
+              {loggedIn ? (
+                <Switch
+                  size="md"
+                  label="Follow"
+                  color="green"
+                  checked={follow}
+                  onChange={(event) => {
+                    setFollow(event.currentTarget.checked);
+                    followAPICall(event.currentTarget.checked);
+                  }}
+                  styles={{
+                    input: { backgroundColor: "gray" },
+                  }}
+                />
+              ) : (
+                ""
+              )}
+
               <Text>
                 Last updated:{" "}
                 {parseISO(payload.createdAt).toLocaleDateString("en-SG", {
@@ -251,15 +254,19 @@ const PromptPage = () => {
               >
                 Toggle Prompt
               </Button>
-              <Button
-                radius="md"
-                color="dark"
-                leftIcon={<Pencil1Icon />}
-                component={Link}
-                to="/editprompt"
-              >
-                Edit
-              </Button>
+              {payload.owner === user._id ? (
+                <Button
+                  radius="md"
+                  color="dark"
+                  leftIcon={<Pencil1Icon />}
+                  component={Link}
+                  to={`/editprompt/${promptID}`}
+                >
+                  Edit
+                </Button>
+              ) : (
+                ""
+              )}
             </Group>
             <Collapse in={collapsePrompt}>
               <Space h="20px" />
@@ -278,15 +285,11 @@ const PromptPage = () => {
             <Collapse in={collapseInfo}>
               <Space h="20px" />
               <Text style={{ whiteSpace: "pre-line" }}>
-                {payload.additionalInfo}
+                {payload.additionalInfo || "No additional info"}
               </Text>
             </Collapse>
             <Space h="20px" />
             <Divider />
-            {/* <StoryNode />
-            <StoryNode />
-            <StoryNode />
-            <StoryNode /> */}
             {storyNodesMapped}
             <Divider />
             <Space h="20px" />
@@ -294,16 +297,17 @@ const PromptPage = () => {
             <Carousel
               showThumbs={false}
               centerMode={true}
-              centerSlidePercentage={100 - proposedNodesMapped.length}
+              centerSlidePercentage={101 - proposedNodesMapped.length}
               style={{ color: "red" }}
               showArrows={true}
               showStatus={false}
               infiniteLoop={true}
               useKeyboardArrows={true}
+              key="carousel"
             >
               {proposedNodesMapped}
             </Carousel>
-            {proposedNodesMapped.length == 0 ? (
+            {proposedNodesMapped.length === 0 ? (
               <div
                 style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}
               >
