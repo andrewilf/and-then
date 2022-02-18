@@ -50,6 +50,7 @@ const PromptPage = () => {
   const [loading, setLoading] = useState(false);
   const [storyNodes, setStoryNodes] = useState([]);
   const [proposedNodes, setProposedNodes] = useState([]);
+  //const [updateToggle, setupdateToggle] = useState(false);
   const storyNodesMapped = storyNodes.map((element) => (
     <StoryNode
       key={element._id + "-sn"}
@@ -68,6 +69,12 @@ const PromptPage = () => {
         text={element.text}
         author={element.author}
         updatedAt={element.updatedAt}
+        promptAPI={async () => {
+          //await followAPICall(promptID);
+          await promptAPICall(promptID);
+        }}
+        // updateToggle={updateToggle}
+        //setupdateToggle={setupdateToggle}
         storyline={payload.storyline[0]._id}
         promptID={promptID}
       />
@@ -83,9 +90,14 @@ const PromptPage = () => {
       console.log(data);
       //data.owner = data.username;
       setPayload(data);
-      console.log((data.followers.find((element) => element == user._id) === user._id), user)
+      console.log(
+        data.followers.find((element) => element == user._id) === user._id,
+        user
+      );
       setFollow(
-        ((data.followers.find((element) => element == user._id) === user._id) ? true : false)
+        data.followers.find((element) => element == user._id) === user._id
+          ? true
+          : false
       );
 
       if (data.storyline[0].storyNodes.length !== 0) {
@@ -101,7 +113,11 @@ const PromptPage = () => {
         } catch (error) {
           console.log("error>>>", error);
           setLoading(false);
+          return false;
         }
+      } else {
+        console.log("no story nodes found");
+        setStoryNodes([]);
       }
       if (data.storyline[0].proposedNodes.length !== 0) {
         console.log("proposed nodes found");
@@ -116,12 +132,18 @@ const PromptPage = () => {
         } catch (error) {
           console.log("error>>>", error);
           setLoading(false);
+          return false;
         }
+      } else {
+        console.log("no proposed nodes found");
+        setProposedNodes([]);
       }
       setLoading(false);
+      return true;
     } catch (error) {
       console.log("error>>>", error);
       setLoading(false);
+      return false;
     }
   };
 
@@ -226,6 +248,7 @@ const PromptPage = () => {
                   checked={follow}
                   onChange={(event) => {
                     setFollow(event.currentTarget.checked);
+                    console.log("follow state", event.currentTarget.checked);
                     followAPICall(event.currentTarget.checked);
                   }}
                   styles={{
@@ -291,62 +314,96 @@ const PromptPage = () => {
             <Space h="20px" />
             <Divider />
             {storyNodesMapped}
-            <Divider />
-            <Space h="20px" />
-            <Title order={2}>Possible suggestions</Title>
-            <Carousel
-              showThumbs={false}
-              centerMode={true}
-              centerSlidePercentage={101 - proposedNodesMapped.length}
-              style={{ color: "red" }}
-              showArrows={true}
-              showStatus={false}
-              infiniteLoop={true}
-              useKeyboardArrows={true}
-              key="carousel"
-            >
-              {proposedNodesMapped}
-            </Carousel>
-            {proposedNodesMapped.length === 0 ? (
-              <div
-                style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}
-              >
-                <Card shadow="sm" padding="lg" radius="lg" withBorder={true}>
-                  <Card.Section>
-                    <Image
-                      src={payload.bannerURL}
-                      height={160}
-                      alt="banner image"
-                      withPlaceholder
-                    />
-                  </Card.Section>
-                  <Group
-                    position="apart"
-                    style={{ marginBottom: 5, marginTop: 2 }}
+            {payload.status === "Ongoing" ? (
+              <div>
+                <Divider />
+                <Space h="20px" />
+                <Title order={2}>Possible suggestions</Title>
+                <Carousel
+                  showThumbs={false}
+                  centerMode={true}
+                  centerSlidePercentage={101 - proposedNodesMapped.length}
+                  style={{ color: "red" }}
+                  showArrows={true}
+                  showStatus={false}
+                  infiniteLoop={true}
+                  useKeyboardArrows={true}
+                  key="carousel"
+                >
+                  {proposedNodesMapped}
+                </Carousel>
+                {proposedNodesMapped.length === 0 ? (
+                  <div
+                    style={{
+                      width: 340,
+                      margin: "auto",
+                      paddingBottom: "1.5%",
+                    }}
                   >
-                    <Title order={2} weight={700}>
-                      No other suggestions
-                    </Title>
-                  </Group>
-                  <Space h="10px" />
-                  Contribute and play a part in the story's creation.
-                </Card>
+                    <Card
+                      shadow="sm"
+                      padding="lg"
+                      radius="lg"
+                      withBorder={true}
+                    >
+                      <Card.Section>
+                        <Image
+                          src={payload.bannerURL}
+                          height={160}
+                          alt="banner image"
+                          withPlaceholder
+                        />
+                      </Card.Section>
+                      <Group
+                        position="apart"
+                        style={{ marginBottom: 5, marginTop: 2 }}
+                      >
+                        <Title order={2} weight={700}>
+                          No other suggestions
+                        </Title>
+                      </Group>
+                      <Space h="10px" />
+                      Contribute and play a part in the story's creation.
+                    </Card>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <Group position="center" direction="column">
+                  <Button
+                    component={Link}
+                    to={`/createnode/${promptID}/${payload.storyline[0]._id}`}
+                    radius="md"
+                    size="xl"
+                    color="dark"
+                  >
+                    Suggest node
+                  </Button>
+                  {payload.owner === user._id ? (
+                    <div>
+                      <Button
+                        // component={Link}
+                        // to={`/createnode/${promptID}/${payload.storyline[0]._id}`}
+                        onClick={() => {
+                          console.log("the end");
+                          promptAPICall(promptID);
+                        }}
+                        radius="md"
+                        size="xl"
+                        color="green"
+                      >
+                        Close story
+                      </Button>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </Group>
               </div>
             ) : (
-              ""
+              <div></div>
             )}
           </div>
-          <Group position="center">
-            <Button
-              component={Link}
-              to={`/createnode/${promptID}/${payload.storyline[0]._id}`}
-              radius="md"
-              size="xl"
-              color="dark"
-            >
-              Suggest node
-            </Button>
-          </Group>
         </div>
       ) : (
         <div style={{ height: "200px" }}>

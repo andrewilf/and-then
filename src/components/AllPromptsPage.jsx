@@ -8,6 +8,7 @@ import {
   Pagination,
   Center,
   Divider,
+  Grid,
   Text,
 } from "@mantine/core";
 import PromptCard from "./PromptCard";
@@ -68,19 +69,21 @@ const AllPromptsPage = () => {
   // console.log("name: ", nameSearch);
 
   const allPromptCards = promptsDisplay["docs"].map((element) => (
-    <PromptCard
-      key={element._id}
-      _id={element._id}
-      title={element.title}
-      rating={element.rating}
-      genre={element.genre}
-      updated={element.updatedAt}
-      status={element.status}
-      bannerURL={element.bannerURL}
-      promptText={element.promptText}
-      nodeCount={element.storyline[0].storyNodes.length}
-      followerCount={element.followers.length}
-    />
+    <Grid.Col span={3} key={element._id}>
+      <PromptCard
+        key={element._id}
+        _id={element._id}
+        title={element.title}
+        rating={element.rating}
+        genre={element.genre}
+        updated={element.updatedAt}
+        status={element.status}
+        bannerURL={element.bannerURL}
+        promptText={element.promptText}
+        nodeCount={element.storyline[0].storyNodes.length}
+        followerCount={element.followers.length}
+      />
+    </Grid.Col>
   ));
 
   useEffect(async () => {
@@ -188,13 +191,21 @@ const AllPromptsPage = () => {
       </Center>
       <Space h="40px" />
       <Group position="center">
-        {loading ? <Loader color="gray" variant="dots" /> : allPromptCards}
+        {!loading ? (
+          <Grid grow={false} columns={9} justify="flex-start">
+            {loading ? <Loader color="gray" variant="dots" /> : allPromptCards}
+          </Grid>
+        ) : (
+          ""
+        )}
+
         {allPromptCards.length === 0 && !loading ? (
           <Text>No prompt found</Text>
         ) : (
           ""
         )}
       </Group>
+
       <Space h="40px" />
       <Center>
         <Pagination

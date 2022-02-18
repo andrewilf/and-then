@@ -28,6 +28,7 @@ function App() {
   const [quote, setQuote] = useState("");
   const [quoteAuthor, setQuoteAuthor] = useState("");
   const accessToken = localStorage.getItem("token");
+  const [randomPromptID, setRandomPromptID] = useState("");
 
   const updateQuote = async () => {
     // Fetch a random quote from the Quotable API
@@ -39,6 +40,29 @@ function App() {
     } catch (error) {
       setQuote("An error occured");
       console.log(error);
+    }
+  };
+
+  const getRandomPrompt = async () => {
+    // Fetch a random prompt
+    try {
+      const response = await fetch(
+        "https://and-then-backend.herokuapp.com/prompt/random",
+        {
+          method: "GET",
+          headers: {
+            "x-access-token": accessToken,
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      setRandomPromptID(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   };
 
@@ -74,10 +98,10 @@ function App() {
         setUser(false);
         setLoggedIn(false);
         localStorage.removeItem("token");
-       // navigate("iamnew");
+        // navigate("iamnew");
       }
     } else {
-     // navigate("iamnew");
+      // navigate("iamnew");
       console.log("no access token found");
     }
   };
@@ -89,6 +113,8 @@ function App() {
     if (isMounted) {
       updateQuote();
       checkLogin();
+      getRandomPrompt();
+      // await getRecentPrompts();
     }
     return () => {
       isMounted = false;
@@ -108,22 +134,27 @@ function App() {
                 padding="xl"
                 style={{ backgroundColor: theme.colors.dark[5] }}
               >
-                <NavigationBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+                <NavigationBar
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  randomPromptID={randomPromptID}
+                />
               </Header>
             }
           >
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-                }
-              />
+              <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/prompts" element={<AllPromptsPage />} />
               <Route path="/iamnew" element={<NewPage />} />
-              <Route path="/createnode/:promptID/:storylineID" element={<CreateNodePage />} />
-              <Route path="/editnode/:promptID/:storylineID/:nodeID" element={<EditNodePage />} />
+              <Route
+                path="/createnode/:promptID/:storylineID"
+                element={<CreateNodePage />}
+              />
+              <Route
+                path="/editnode/:promptID/:storylineID/:nodeID"
+                element={<EditNodePage />}
+              />
               <Route path="/prompt/:promptID" element={<PromptPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route
@@ -135,10 +166,12 @@ function App() {
                 element={<SignupPage quote={quote} quoteAuthor={quoteAuthor} />}
               />
               <Route path="/createprompt" element={<CreatePromptPage />} />
-              <Route path="/editprompt/:promptID" element={<EditPromptPage />} />
-              
+              <Route
+                path="/editprompt/:promptID"
+                element={<EditPromptPage />}
+              />
             </Routes>
-            <Footer />
+            <Footer randomPromptID={randomPromptID} />
           </AppShell>
         </adminContext.Provider>
       </userContext.Provider>

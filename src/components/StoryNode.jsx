@@ -11,6 +11,7 @@ const StoryNode = (props) => {
   const navigate = useNavigate();
   const notifications = useNotifications();
   const modals = useModals();
+
   const openConfirmModal = () =>
     modals.openConfirmModal({
       closeOnConfirm: false,
@@ -65,16 +66,19 @@ const StoryNode = (props) => {
         },
         body: JSON.stringify({ storyline: props.storyline }),
       });
-      const data = await response.json();
+      const data = await response.json(); //.then(props.promptAPI());
       console.log(data);
       //navigate(`/prompt/${props.promptID}`)
-      window.location.reload(false);
+      //window.location.reload(false);
+
+      //props.setupdateToggle(!props.updateToggle)
       notifications.showNotification({
         title: "Node suggested",
         message: "Hey there, you deleted a suggested node!",
         color: "red",
         //  style: { backgroundColor: "red" },
       });
+      const result = await props.promptAPI()
     } catch (error) {
       console.log("error>>>", error);
     }
@@ -91,16 +95,19 @@ const StoryNode = (props) => {
         },
         body: JSON.stringify({ storyline: props.storyline }),
       });
-      const data = await response.json();
+      const data = await response.json(); //.then(props.promptAPI());
       console.log(data);
       //navigate(`/prompt/${props.promptID}`)
-      window.location.reload(false);
+      //await props.promptAPI();
+      //window.location.reload(false);
+      //props.setupdateToggle(!props.updateToggle)
       notifications.showNotification({
         title: "Node suggested",
         message: "Hey there, you added a suggested node to the storyline!",
         color: "green",
         //  style: { backgroundColor: "red" },
       });
+      const result = await props.promptAPI()
     } catch (error) {
       console.log("error>>>", error);
     }

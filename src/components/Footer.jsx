@@ -13,10 +13,21 @@ import {
   GitHubLogoIcon,
   HomeIcon,
 } from "@modulz/radix-icons";
-import { Link } from "react-router-dom";
+import { LoginContext, adminContext, userContext } from "../global/context";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Footer = () => {
+const Footer = (props) => {
   const theme = useMantineTheme();
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const { admin, setAdmin } = useContext(adminContext);
+  const { user, setUser } = useContext(userContext);
+  // const [randomPromptID, setRandomPromptID] = useState("");
+  const navigate = useNavigate();
+
+  // useEffect(async () => {
+  //   setRandomPromptID(await props.getRandomPrompt());
+  // }, []);
   return (
     <div
       style={{
@@ -73,7 +84,12 @@ const Footer = () => {
           <Anchor component={Link} to="/">
             Home
           </Anchor>
-          <Anchor component={Link} to="/prompt">
+          <Anchor
+            onClick={() => {
+              navigate(`/prompt/${props.randomPromptID}`);
+              window.location.reload(false);
+            }}
+          >
             Random Prompt
           </Anchor>
           <Anchor component={Link} to="/prompts">
