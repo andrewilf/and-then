@@ -31,14 +31,13 @@ const AllPromptsPage = () => {
   const [ratingSelect, setRatingSelect] = useState([]);
   const [statusSelect, setStatusSelect] = useState([]);
   const [nameSearch, setNameSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   //const pagination = usePagination({ total: 11, initialPage: 5 });
   //pagination.setPage(2)
   //setActivePage(3);
 
   const promptAPICall = async (page) => {
     let baseURL = `https://and-then-backend.herokuapp.com/prompt/search/${page}/?`;
-    setLoading(true);
     if (genreSelect.length !== 0) {
       baseURL += `genre=${genreSelect}&`;
     }
@@ -88,8 +87,10 @@ const AllPromptsPage = () => {
 
   useEffect(async () => {
     let isMounted = true;
+    console.log(loading);
     if (isMounted) {
       setScroll({ y: 0 });
+      //setLoading(true);
       promptAPICall(activePage);
     }
     return () => {
@@ -191,13 +192,9 @@ const AllPromptsPage = () => {
       </Center>
       <Space h="40px" />
       <Group position="center">
-        {!loading ? (
-          <Grid grow={false} columns={9} justify="flex-start">
-            {loading ? <Loader color="gray" variant="dots" /> : allPromptCards}
-          </Grid>
-        ) : (
-          ""
-        )}
+        <Grid grow={"asd" || false} columns={9} justify="flex-start">
+          {loading ? <Loader color="gray" variant="dots" /> : allPromptCards}
+        </Grid>
 
         {allPromptCards.length === 0 && !loading ? (
           <Text>No prompt found</Text>

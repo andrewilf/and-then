@@ -12,13 +12,18 @@ import {
   Center,
   useMantineTheme,
 } from "@mantine/core";
+import { LoginContext, adminContext, userContext } from "../global/context";
 import { Carousel } from "react-responsive-carousel";
 import { useModals } from "@mantine/modals";
 import { Pencil1Icon } from "@modulz/radix-icons";
 import PromptCard from "./PromptCard";
+import { useEffect, useContext } from "react";
 const ProfilePage = () => {
   const theme = useMantineTheme();
   const modals = useModals();
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const { admin, setAdmin } = useContext(adminContext);
+  const { user, setUser } = useContext(userContext);
   const openConfirmModal = () =>
     modals.openConfirmModal({
       closeOnConfirm: false,
@@ -41,6 +46,7 @@ const ProfilePage = () => {
         modals.closeModal();
       },
     });
+  useEffect(() => {});
 
   return (
     <div style={{ width: "100%", padding: "5% 3% 5% 3%" }}>
@@ -51,13 +57,13 @@ const ProfilePage = () => {
             src="https://media.istockphoto.com/vectors/silhouette-of-a-head-vector-id515660465?k=20&m=515660465&s=612x612&w=0&h=FFGsoAtgMdbEWgtzQOq_wMZrQP9S_C85T2-9mix6hdg="
             height={190}
             width={190}
-            alt="Norway"
+            alt="profile"
             radius={"md"}
           />
         </Center>
 
         <Group position="center">
-          <Title order={3}>Username: TestUser1</Title>
+          <Title order={3}>Username: {user.username}</Title>
           <Button
             radius="md"
             color="dark"
@@ -156,12 +162,12 @@ const ProfilePage = () => {
         infiniteLoop={true}
         useKeyboardArrows={true}
       > */}
-        <Group spacing="md" >
-          <PromptCard />
-          <PromptCard />
-          <PromptCard />
-        </Group>
-        {/* <Group spacing="xs" position="left">
+      <Group spacing="md">
+        <PromptCard />
+        <PromptCard />
+        <PromptCard />
+      </Group>
+      {/* <Group spacing="xs" position="left">
           <PromptCard />
           <PromptCard />
           <PromptCard />

@@ -1,8 +1,8 @@
-import { createContext} from "react";
+import { createContext } from "react";
 
-const LoginContext= createContext({});
-const adminContext= createContext({});
-const userContext= createContext({});
+const LoginContext = createContext({});
+const adminContext = createContext({});
+const userContext = createContext({});
+const recentPromptContext = createContext({});
 
-
-export {LoginContext, adminContext, userContext}
+export { LoginContext, adminContext, userContext, recentPromptContext };

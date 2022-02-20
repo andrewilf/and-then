@@ -3,50 +3,27 @@ import PromptCard from "./PromptCard";
 import { Carousel } from "react-responsive-carousel";
 import { useWindowScroll } from "@mantine/hooks";
 import { useEffect, useState, useContext } from "react";
-import { LoginContext, adminContext, userContext } from "../global/context";
+import {
+  LoginContext,
+  adminContext,
+  userContext,
+  recentPromptContext,
+} from "../global/context";
 
 const HomePage = (props) => {
   const carouselWidth = 100;
   const [scroll, setScroll] = useWindowScroll();
-  const [recentPrompts, setRecentPrompts] = useState([]);
+  //const [recentPrompts, setRecentPrompts] = useState([]);
   const [followedPrompts, setFollowedPrompts] = useState([]);
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
+  const { recentPrompts, setRecentPrompts } = useContext(recentPromptContext);
   const [loading, setLoading] = useState(true);
-
-  const getRecentPrompts = async () => {
-    // Fetch 5 recent prompts
-    try {
-      const response = await fetch(
-        "https://and-then-backend.herokuapp.com/prompt/recentupdated",
-        {
-          method: "GET",
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setRecentPrompts(data);
-      // if (user._id) {
-      //   setLoading(false);
-      // }
-      setLoading(false);
-      //return data;
-    } catch (error) {
-      console.log(error);
-      // if (user._id) {
-      //   setLoading(false);
-      // }
-      setLoading(false);
-     // return false;
-    }
-  };
 
   const getFollowedPrompts = async () => {
     // Fetch 5 recent prompts
+    setLoading(true);
     try {
       const response = await fetch(
         `https://and-then-backend.herokuapp.com/prompt/followed/${user._id}`,
@@ -103,15 +80,18 @@ const HomePage = (props) => {
     />
   ));
 
-  useEffect( () => {
+  useEffect(() => {
     //setScroll({ y: 0 });
     // setLoading(true);
-    if (user._id) {
-      // setLoading(true);
-       getFollowedPrompts();
+
+    if (recentPrompts.length !== 0 && user._id) {
+      getFollowedPrompts();
+     
+    } else if (recentPrompts.length !== 0) {
+      setLoading(false);
     }
-     getRecentPrompts();
-  }, [user]);
+    // getRecentPrompts();
+  }, [user, recentPrompts]);
   return (
     <div style={{ padding: "5% 5% 5% 5%", margin: "auto" }}>
       {!loading ? (
@@ -156,7 +136,7 @@ const HomePage = (props) => {
 
           <Space h="60px" />
           <Title order={1} align="center">
-            Recently updated Prompts
+            Recent prompts
           </Title>
           <Space h="20px" />
 

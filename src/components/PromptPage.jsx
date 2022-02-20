@@ -169,12 +169,12 @@ const PromptPage = () => {
   useEffect(() => {
     promptAPICall();
     //setScroll({ y: 0 });
-  }, [user]);
+  }, [user, promptID]);
 
   return (
     <div
       style={{
-        padding: "5% 5% 5% 5%",
+        padding: "2% 5% 5% 5%",
       }}
     >
       {!loading ? (
@@ -188,7 +188,7 @@ const PromptPage = () => {
               style={{ width: "100%", margin: "auto" }}
               src={payload.bannerURL}
               radius="lg"
-              height={450}
+              height={400}
               withPlaceholder
               alt="banner image"
             />
@@ -318,7 +318,7 @@ const PromptPage = () => {
               <div>
                 <Divider />
                 <Space h="20px" />
-                <Title order={2}>Possible suggestions</Title>
+                <Title order={2}>and then...</Title>
                 <Carousel
                   showThumbs={false}
                   centerMode={true}
@@ -392,7 +392,7 @@ const PromptPage = () => {
                         size="xl"
                         color="green"
                       >
-                        Close story
+                        The End.
                       </Button>
                     </div>
                   ) : (

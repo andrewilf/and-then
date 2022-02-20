@@ -7,13 +7,19 @@ import {
   Input,
   Space,
   Divider,
+  Loader,
 } from "@mantine/core";
 import {
   EnvelopeClosedIcon,
   GitHubLogoIcon,
   HomeIcon,
 } from "@modulz/radix-icons";
-import { LoginContext, adminContext, userContext } from "../global/context";
+import {
+  LoginContext,
+  adminContext,
+  userContext,
+  recentPromptContext,
+} from "../global/context";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,8 +28,15 @@ const Footer = (props) => {
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
+  const { recentPrompts, setRecentPrompts } = useContext(recentPromptContext);
   // const [randomPromptID, setRandomPromptID] = useState("");
   const navigate = useNavigate();
+
+  const allRecentPrompts = recentPrompts.map((element) => (
+    <Anchor key={element._id} component={Link} variant="text" to={`/prompt/${element._id}`}>
+      {element.title}
+    </Anchor>
+  ));
 
   // useEffect(async () => {
   //   setRandomPromptID(await props.getRandomPrompt());
@@ -87,7 +100,7 @@ const Footer = (props) => {
           <Anchor
             onClick={() => {
               navigate(`/prompt/${props.randomPromptID}`);
-              window.location.reload(false);
+              //window.location.reload(false);
             }}
           >
             Random Prompt
@@ -111,21 +124,13 @@ const Footer = (props) => {
         >
           <Text weight={700}>RECENT PROMPTS</Text>
           <Divider />
-          <Anchor component={Link} variant="text" to="/prompt">
-            Hunt for the MacGuffin MacMuffin
-          </Anchor>
-          <Anchor component={Link} variant="text" to="/prompt">
-            Letter Runner
-          </Anchor>
-          <Anchor component={Link} variant="text" to="/prompt">
-            Hackerman
-          </Anchor>
-          <Anchor component={Link} variant="text" to="/prompt">
-            Suprise! Pirates
-          </Anchor>
-          <Anchor component={Link} variant="text" to="/prompt">
-            How to go back to tomorrow
-          </Anchor>
+          {recentPrompts.length !== 0 ? (
+            allRecentPrompts
+          ) : (
+            <div style={{paddingTop: "5px"}}>
+              <Loader color="gray" size="md" variant="dots" />
+            </div>
+          )}
         </div>
         <div style={{ alignSelf: "flex-start", marginRight: "10px" }}>
           <Text weight={700}>NEWSLETTER</Text>
