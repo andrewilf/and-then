@@ -1,17 +1,18 @@
 import { Title, Space, Group, Text, Blockquote, Skeleton } from "@mantine/core";
-
+import { useState, useEffect, useContext } from "react";
 const NewPage = (props) => {
+  useEffect(() => {
+    document.title = `Then - I am New`;
+  }, []);
   return (
     <div style={{ padding: "5% 5% 5% 5%" }}>
-      {props.quoteAuthor === "" ? (
-        <div>
-          <Skeleton height={15} mt={12} radius="xl" />
-          <Skeleton height={15} mt={12} radius="xl" />
-          <Skeleton height={15} mt={12} width="30%" radius="xl" />
-        </div>
-      ) : (
-        <Blockquote cite={props.quoteAuthor}>{props.quote}</Blockquote>
-      )}
+      <Group position="center">
+        <Blockquote cite={"Robin Williams"}>
+          {
+            "Being in the same room with people and creating something together is a good thing."
+          }
+        </Blockquote>
+      </Group>
 
       <Title order={1}>Welcome to And Then</Title>
       <Text> a collaborative writing platform where everyone can write!</Text>

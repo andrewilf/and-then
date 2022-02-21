@@ -119,6 +119,7 @@ const HomePage = (props) => {
 
   useEffect(() => {
     //setScroll({ y: 0 });
+    document.title = `Then - Home`;
     // setLoading(true);
 
     if (trendingPrompts.length === 0) {

@@ -1,6 +1,9 @@
 import { Title, Divider, Text, Space } from "@mantine/core";
-
+import { useState, useEffect, useContext } from "react";
 const AboutPage = () => {
+  useEffect(() => {
+    document.title = `Then - About`;
+  }, []);
   return (
     <div
       style={{
@@ -11,9 +14,9 @@ const AboutPage = () => {
       <Divider />
       <Text>
         And Then is an independent project which aims to create a collaborative
-        writing platform for aspiring authors. Writing is a fun yet daunting
-        task, why not work with others to help get your feet wet in creating a
-        story from start to finish?
+        writing platform for aspiring authors. The platform is a React app with
+        an express server set up to handle the backend. All MongoDB database
+        transactions are done using Mongoose.
       </Text>
       <Space h="65px" />
       <Title>Feedback</Title>
@@ -26,13 +29,18 @@ const AboutPage = () => {
       <Title>Changelog</Title>
       <Divider />
       <Space h="15px" />
+      <Title order={3}>version 0.7 (Alpha test)</Title>
+      <ul>
+        <li>Storylines can now be ended</li>
+        <li>Titles change on page change, faveicon changed</li>
+      </ul>
+      <Space h="15px" />
       <Title order={3}>version 0.6 (Alpha test)</Title>
       <ul>
         <li>basic functionality implemented</li>
       </ul>
       <Title order={3}>Upcoming features</Title>
       <ul>
-        <li>The ability to end stories, currently is just a button</li>
         <li>Able to save stories as PDFs</li>
         <li>Profile Page works</li>
         <li>I am new page populated</li>

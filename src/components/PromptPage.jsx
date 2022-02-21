@@ -22,6 +22,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Pencil1Icon } from "@modulz/radix-icons";
 import { LoginContext, adminContext, userContext } from "../global/context";
 import variousVariables from "./variousVariables";
+import { useModals } from "@mantine/modals";
 
 const PromptPage = () => {
   const [payload, setPayload] = useState({
@@ -39,6 +40,29 @@ const PromptPage = () => {
     updatedAt: "",
     followers: [],
   });
+  const modals = useModals();
+
+  const openConfirmModal = () =>
+    modals.openConfirmModal({
+      closeOnConfirm: false,
+      title: "Confirm end storyline",
+      children: (
+        <Text color="red">
+          Are you sure you want to end the storyline? No new nodes can be
+          suggested or added, it cannot be undone once confirmed.
+        </Text>
+      ),
+      labels: { confirm: "Confirm", cancel: "Cancel" },
+      onCancel: () => {
+        console.log("Cancel");
+      },
+      onConfirm: () => {
+        console.log("Confirmed");
+        endStorylineAPICall();
+        //command to close modal
+        modals.closeModal();
+      },
+    });
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
@@ -94,8 +118,9 @@ const PromptPage = () => {
         data.followers.find((element) => element == user._id) === user._id,
         user
       );
+      document.title = `Then - ${data.title}`
       setFollow(
-        data.followers.find((element) => element == user._id) === user._id
+        data.followers.find((element) => element == user._id) === user._id && user._id !== undefined
           ? true
           : false
       );
@@ -166,8 +191,30 @@ const PromptPage = () => {
     }
   };
 
+  const endStorylineAPICall = async () => {
+    // setLoading(true)
+    const baseURL = `https://and-then-backend.herokuapp.com/prompt/${promptID}/`;
+    try {
+      const response = await fetch(baseURL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ status: "Completed" }),
+      });
+      const data = await response.json();
+      console.log(data);
+      promptAPICall(promptID);
+    } catch (error) {
+      console.log("error>>>", error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     promptAPICall();
+    
     //setScroll({ y: 0 });
   }, [user, promptID]);
 
@@ -314,6 +361,13 @@ const PromptPage = () => {
             <Space h="20px" />
             <Divider />
             {storyNodesMapped}
+            {storyNodesMapped.length === 0 ? (
+              <Text align="center">
+                No story nodes added to the storyline yet.
+              </Text>
+            ) : (
+              ""
+            )}
             {payload.status === "Ongoing" ? (
               <div>
                 <Divider />
@@ -386,7 +440,7 @@ const PromptPage = () => {
                         // to={`/createnode/${promptID}/${payload.storyline[0]._id}`}
                         onClick={() => {
                           console.log("the end");
-                          promptAPICall(promptID);
+                          openConfirmModal();
                         }}
                         radius="md"
                         size="xl"
@@ -401,7 +455,9 @@ const PromptPage = () => {
                 </Group>
               </div>
             ) : (
-              <div></div>
+              <Text size="xl" align="center">
+                The end.
+              </Text>
             )}
           </div>
         </div>

@@ -88,6 +88,7 @@ const AllPromptsPage = () => {
   useEffect(async () => {
     let isMounted = true;
     console.log(loading);
+    document.title = `Then - All prompts`;
     if (isMounted) {
       setScroll({ y: 0 });
       //setLoading(true);
@@ -192,8 +193,8 @@ const AllPromptsPage = () => {
       </Center>
       <Space h="40px" />
       <Group position="center">
-        <Grid grow={"asd" || false} columns={9} justify="flex-start">
-          {loading ? <Loader color="gray" variant="dots" /> : allPromptCards}
+        <Grid grow={false} columns={9} justify="flex-start">
+          {loading ? <Grid.Col span={3}><Loader color="gray" variant="dots" /></Grid.Col> : allPromptCards}
         </Grid>
 
         {allPromptCards.length === 0 && !loading ? (

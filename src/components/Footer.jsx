@@ -110,7 +110,7 @@ const Footer = (props) => {
             Prompts
           </Anchor>
           <Anchor component={Link} to="/iamnew">
-            I am new
+            I am New
           </Anchor>
           <Anchor component={Link} to="/about">
             About

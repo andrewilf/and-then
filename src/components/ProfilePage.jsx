@@ -49,6 +49,7 @@ const ProfilePage = () => {
     });
   useEffect(() => {
     setUsername(user.username);
+    document.title = `Then - Profile`;
   }, [user]);
 
   return (

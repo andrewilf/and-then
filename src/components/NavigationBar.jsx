@@ -1,6 +1,6 @@
 import { Text, Group, Anchor, Image } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../img/andthenlogo.png";
+import logo from "../img/and then logo.png";
 import { LoginContext, adminContext, userContext } from "../global/context";
 import { useContext, useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ const NavigationBar = (props) => {
       <Text size="md">Default text</Text> */}
       <Group position="apart">
         <Anchor component={Link} variant="text" to="/">
-          <Image radius="xs" alt="and then logo" src={logo} height={"55px"} />
+          <Image alt="and then logo" src={logo} height={"52px"} />
         </Anchor>
         <Anchor
           // component={Link}
@@ -38,7 +38,7 @@ const NavigationBar = (props) => {
           Prompts
         </Anchor>
         <Anchor component={Link} variant="text" to="/iamnew">
-          I am new
+          I am New
         </Anchor>
         <Anchor component={Link} variant="text" to="/about">
           About

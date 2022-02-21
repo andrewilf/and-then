@@ -15,7 +15,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { EnvelopeOpenIcon, PersonIcon } from "@modulz/radix-icons";
 import { useForm } from "@mantine/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNotifications } from "@mantine/notifications";
 
 const SignupPage = (props) => {
@@ -128,7 +128,9 @@ const SignupPage = (props) => {
       console.log("prompt creation failed");
     }
   };
-
+  useEffect(() => {
+    document.title = `Then - Sign Up`;
+  }, []);
   return (
     <div style={{ width: "50%", margin: "auto", padding: "5% 5% 5% 5%" }}>
       <form

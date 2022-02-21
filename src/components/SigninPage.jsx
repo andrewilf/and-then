@@ -75,7 +75,9 @@ const SigninPage = (props) => {
     //   setError("Invalid Login");
     // }
   };
-
+  useEffect(() => {
+    document.title = `Then - Sign In`;
+  }, []);
   return (
     <div style={{ width: "50%", margin: "auto", padding: "5% 5% 5% 5%" }}>
       <form
@@ -107,7 +109,9 @@ const SigninPage = (props) => {
               id="input-email"
               placeholder="Your email"
               icon={<EnvelopeOpenIcon />}
-              onFocus={()=> {setError("")}}
+              onFocus={() => {
+                setError("");
+              }}
               {...form.getInputProps("email")}
             />
           </InputWrapper>
@@ -122,7 +126,9 @@ const SigninPage = (props) => {
               id="input-password"
               icon={<LockClosedIcon />}
               placeholder="Your password"
-              onFocus={()=> {setError("")}}
+              onFocus={() => {
+                setError("");
+              }}
               {...form.getInputProps("password")}
             />
           </InputWrapper>
