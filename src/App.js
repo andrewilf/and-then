@@ -15,6 +15,7 @@ import ProfilePage from "./components/ProfilePage";
 import SignupPage from "./components/SignupPage";
 import SigninPage from "./components/SigninPage";
 import CreatePromptPage from "./components/CreatePromptPage";
+import PromptPagePDF from "./components/PromptPagePDF";
 import EditPromptPage from "./components/EditPromptPage";
 import EditNodePage from "./components/EditNodePage";
 import {
@@ -209,6 +210,7 @@ function App() {
                   element={<EditNodePage />}
                 />
                 <Route path="/prompt/:promptID" element={<PromptPage />} />
+                <Route path="/promptpdf/:promptID" element={<PromptPagePDF />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route
                   path="/signin"
