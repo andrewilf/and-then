@@ -17,13 +17,14 @@ import { Carousel } from "react-responsive-carousel";
 import { useModals } from "@mantine/modals";
 import { Pencil1Icon } from "@modulz/radix-icons";
 import PromptCard from "./PromptCard";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 const ProfilePage = () => {
   const theme = useMantineTheme();
   const modals = useModals();
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
+  const [username, setUsername] = useState("");
   const openConfirmModal = () =>
     modals.openConfirmModal({
       closeOnConfirm: false,
@@ -35,7 +36,7 @@ const ProfilePage = () => {
           description="Please enter new username."
           error="username already in use"
         >
-          <Input id="input-username" value={"UserTest1"} />
+          <Input id="input-username" onChange={setUsername} value={username} />
         </InputWrapper>
       ),
       labels: { confirm: "Confirm", cancel: "Cancel" },
@@ -46,7 +47,9 @@ const ProfilePage = () => {
         modals.closeModal();
       },
     });
-  useEffect(() => {});
+  useEffect(() => {
+    setUsername(user.username);
+  }, [user]);
 
   return (
     <div style={{ width: "100%", padding: "5% 3% 5% 3%" }}>
@@ -63,7 +66,7 @@ const ProfilePage = () => {
         </Center>
 
         <Group position="center">
-          <Title order={3}>Username: {user.username}</Title>
+          <Title order={3}>Username: {username}</Title>
           <Button
             radius="md"
             color="dark"
@@ -130,7 +133,7 @@ const ProfilePage = () => {
             }}
           >
             <Title align="center" order={4}>
-              Contributed prompts
+              Followed prompts
             </Title>
             <div
               style={{
@@ -151,6 +154,7 @@ const ProfilePage = () => {
         </Group>
       </Group>
       <Title order={2} align="center">
+        <Space h="25px" />
         Recently updated Prompts
       </Title>
       <Space h="20px" />

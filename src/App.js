@@ -178,12 +178,22 @@ function App() {
                     loggedIn={loggedIn}
                     setLoggedIn={setLoggedIn}
                     randomPromptID={randomPromptID}
+                    getRandomPrompt={getRandomPrompt}
                   />
                 </Header>
               }
             >
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route
+                  path="/"
+                  element={
+                    loggedIn ? (
+                      <HomePage />
+                    ) : (
+                      <NewPage quote={quote} quoteAuthor={quoteAuthor} />
+                    )
+                  }
+                />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/prompts" element={<AllPromptsPage />} />
                 <Route
@@ -218,7 +228,10 @@ function App() {
                   element={<EditPromptPage />}
                 />
               </Routes>
-              <Footer randomPromptID={randomPromptID} />
+              <Footer
+                randomPromptID={randomPromptID}
+                getRandomPrompt={getRandomPrompt}
+              />
             </AppShell>
           </recentPromptContext.Provider>
         </adminContext.Provider>

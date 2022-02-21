@@ -99,6 +99,7 @@ const Footer = (props) => {
           </Anchor>
           <Anchor
             onClick={() => {
+              props.getRandomPrompt()
               navigate(`/prompt/${props.randomPromptID}`);
               //window.location.reload(false);
             }}

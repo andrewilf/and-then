@@ -18,10 +18,10 @@ const PromptCard = (props) => {
   const theme = useMantineTheme();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
-  
+
   //console.log(props.nodeCount)
   return (
-    <div style={{ width: 340, margin: "auto", paddingBottom: "1.5%" }}>
+    <div style={{ width: 360, margin: "auto", paddingBottom: "1.5%" }}>
       <Card
         component={Link}
         to={`/prompt/${props._id}`}
@@ -46,9 +46,6 @@ const PromptCard = (props) => {
           <Title order={2} weight={700}>
             {props.title}
           </Title>
-          <Badge color={variousVariables.ratingColor[props.rating]} variant="light">
-            {props.rating}
-          </Badge>
         </Group>
         <Group
           position="apart"
@@ -56,8 +53,21 @@ const PromptCard = (props) => {
         >
           <Text size="xs">Followers: {props.followerCount || "0"}</Text>
           <Text size="xs">Nodes: {props.nodeCount || "0"}</Text>
-          <Badge color={variousVariables.genreColor(props.genre)} variant="outline">
+          <Badge
+            color={variousVariables.genreColor(props.genre)}
+            variant="outline"
+          >
             {props.genre}
+          </Badge>
+        </Group>
+        <Space h="10px" />
+
+        <Group position="right">
+          <Badge
+            color={variousVariables.ratingColor[props.rating]}
+            variant="light"
+          >
+            {props.rating}
           </Badge>
         </Group>
         <Space h="10px" />
@@ -70,7 +80,11 @@ const PromptCard = (props) => {
               day: "numeric",
             })}
           </Text>
-          <Badge color={variousVariables.statusColor[props.status]} variant="dot" radius="xl">
+          <Badge
+            color={variousVariables.statusColor[props.status]}
+            variant="dot"
+            radius="xl"
+          >
             {props.status}
           </Badge>
         </Group>

@@ -27,8 +27,9 @@ const NavigationBar = (props) => {
           variant="text"
           // to={`/prompt/${randomPromptID}`}
           onClick={() => {
+            props.getRandomPrompt()
             navigate(`/prompt/${props.randomPromptID}`);
-           // window.location.reload(false);
+          // window.location.reload(false);
           }}
         >
           Random Prompt

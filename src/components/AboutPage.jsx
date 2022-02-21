@@ -32,15 +32,11 @@ const AboutPage = () => {
       </ul>
       <Title order={3}>Upcoming features</Title>
       <ul>
-        <li>The ability to end stories, currently is cosmetic</li>
+        <li>The ability to end stories, currently is just a button</li>
         <li>Able to save stories as PDFs</li>
         <li>Profile Page works</li>
         <li>I am new page populated</li>
         <li>About page populated</li>
-        <li>
-          Trending prompts mechanism created(section currently just show recent
-          prompts)
-        </li>
       </ul>
     </div>
   );

@@ -126,7 +126,7 @@ const StoryNode = (props) => {
       }}
     >
       <Text color="black" align="right">
-        {props.author}
+        Contributor: {props.author}
       </Text>
       <Text color="black" align="right">
         last edited:{" "}
