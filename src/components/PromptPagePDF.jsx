@@ -1,3 +1,4 @@
+import "../App.css";
 import {
   Title,
   Image,
@@ -22,12 +23,17 @@ import { useWindowScroll } from "@mantine/hooks";
 import Pdf from "react-to-pdf";
 import parse from "html-react-parser";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Pencil1Icon } from "@modulz/radix-icons";
+import { ArrowLeftIcon } from "@modulz/radix-icons";
 import { LoginContext, adminContext, userContext } from "../global/context";
 import variousVariables from "./variousVariables";
 import { useModals } from "@mantine/modals";
+import { jsPDF } from "jspdf";
 
 const PromptPagePDF = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
   const [payload, setPayload] = useState({
     additionalInfo: "",
     bannerURL: "",
@@ -44,10 +50,12 @@ const PromptPagePDF = () => {
     followers: [],
   });
   const ref = React.createRef();
+
+  const [height, setheight] = useState(18);
   const options = {
     orientation: "portrait",
     unit: "in",
-    format: [20, 30],
+    format: [windowSize.width / 50, windowSize.height / 50],
   };
 
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
@@ -59,7 +67,7 @@ const PromptPagePDF = () => {
   const [loading, setLoading] = useState(false);
   const [storyNodes, setStoryNodes] = useState([]);
   const [by, setBy] = useState("");
-  //const [updateToggle, setupdateToggle] = useState(false);
+  const [hideButton, setHideButton] = useState(false);
   const storyNodesMapped = storyNodes.map((element) => (
     <StoryNode
       key={element._id + "-sn"}
@@ -68,16 +76,19 @@ const PromptPagePDF = () => {
       updatedAt={element.updatedAt}
     />
   ));
-  const storyNodesMappedPDF = storyNodes.map(
-    (element) =>
-      // <StoryNode
-      //   key={element._id + "-sn"}
-      //   text={element.text}
-      //   author={element.author}
-      //   updatedAt={element.updatedAt}
-      // />
-      element.text
-  );
+  const storyNodesMappedPDF = storyNodes.map((element) => element.text);
+
+  const pdfCreate = () => {
+    const doc = new jsPDF("p", "pt", "a4");
+    //doc.text(parse(storyNodesMappedPDF.join("")), 10, 10);
+    doc.html(document.querySelector("main"), {
+      callback: function (pdf) {
+        const pageCount = doc.internal.getNumberOfPages();
+        pdf.deletePage(pageCount);
+        doc.save(`${payload.title}.pdf`);
+      },
+    });
+  };
 
   const promptAPICall = async () => {
     setLoading(true);
@@ -88,7 +99,7 @@ const PromptPagePDF = () => {
       console.log(data);
       //data.owner = data.username;
       setPayload(data);
-      setBy(data.username);
+      //setBy(data.username);
       console.log(
         data.followers.find((element) => element == user._id) === user._id,
         user
@@ -103,11 +114,14 @@ const PromptPagePDF = () => {
           const responseNode = await fetch(nodeURL);
           const dataNode = await responseNode.json();
           console.log(dataNode);
-          setStoryNodes(dataNode);
-          const authors = dataNode.map((element) => ", " + element.author).join('');
-          const setAuthors = authors.substring(2)
+
+          const authors = dataNode
+            .map((element) => ", " + element.author)
+            .join("");
+          const setAuthors = authors.substring(2);
           //setLoading(false);
           setBy(setAuthors);
+          setStoryNodes(dataNode);
         } catch (error) {
           console.log("error>>>", error);
           setLoading(false);
@@ -125,17 +139,26 @@ const PromptPagePDF = () => {
       return false;
     }
   };
-  //console.log(storyNodesMappedPDF.join())
-
   useEffect(() => {
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+      setheight(document.documentElement.offsetHeight / 100);
+    }
+    window.addEventListener("resize", handleResize);
+    console.log(windowSize);
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
     promptAPICall();
-
+    return () => window.removeEventListener("resize", handleResize);
     //setScroll({ y: 0 });
   }, [user, promptID]);
 
   return (
     <div
-      ref={ref}
       style={{
         padding: "2% 5% 5% 5%",
         color: "black",
@@ -144,71 +167,82 @@ const PromptPagePDF = () => {
     >
       {!loading ? (
         <div>
-          <Title order={1} align="center" style={{ color: "black" }}>
-            {payload.title}
-          </Title>
-
-          {/* <div ref={ref}>
-            <h1>Hello CodeSandbox</h1>
-            <h2>Start editing to see some magic happen!</h2>
-          </div> */}
-          <Space h="20px" />
-          <div style={{ width: "70%", margin: "auto" }}>
-            {/* <Image
-              style={{ width: "100%", margin: "auto" }}
-              src={payload.bannerURL}
-              radius="lg"
-              height={400}
-              withPlaceholder
-              alt="banner image"
-            /> */}
-            <Space h="20px" />
-            <Group position="center">
-              <Group></Group>
-
-              {/* <Text>Prompt Owner: {payload.username}</Text> */}
-              <Text>By: {by}</Text>
-            </Group>
-            <Space h="10px" />
-            <Group position="apart"></Group>
-            <Group position="apart"></Group>
-            <Space h="20px" />
-            <Group position="apart">
-              <Pdf
-                targetRef={ref}
-                options={options}
-                filename={`${payload.title}.pdf`}
-              >
-                {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-              </Pdf>
-            </Group>
-
-            <Text style={{ whiteSpace: "pre-line" }}>{payload.promptText}</Text>
-
-            <Space h="20px" />
-
-            <Space h="20px" />
-            <Divider />
-            {parse(storyNodesMappedPDF.join(""))}
-            {payload.status === "Ongoing" ? (
-              <div>
-                {" "}
-                <Text>{`and then...`}</Text>
-                <Text>Continue the story at: </Text>
-                <Anchor
-                  size="xl"
-                  component={Link}
-                  to={`/prompt/${promptID}`}
-                  color="dark"
+          <Group position="apart">
+            <Button
+              //          radius="xl"
+              color="dark"
+              //   size="xl"
+              leftIcon={<ArrowLeftIcon />}
+              component={Link}
+              to={`/prompt/${promptID}`}
+            >
+              Back
+            </Button>
+            <Pdf
+              targetRef={ref}
+              options={options}
+              filename={`${payload.title}.pdf`}
+              scale={1}
+            >
+              {({ toPdf }) => (
+                <Button
+                  hidden={false}
+                  onClick={() => {
+                    toPdf();
+                  }}
                 >
-                  {`https://and-then-front-end.herokuapp.com/prompt/${promptID}`}
-                </Anchor>
-              </div>
-            ) : (
-              <Text size="xl" align="center">
-                The end.
+                  Generate PDF
+                </Button>
+              )}
+            </Pdf>
+          </Group>
+
+          <div style={{ padding: "15px" }} ref={ref}>
+            <Title order={1} align="center" style={{ color: "black" }}>
+              {payload.title}
+            </Title>
+
+            <Space h="20px" />
+            {/* <Button onClick={pdfCreate}>click for pdf</Button> */}
+            <div key="main" id="main" style={{ padding: "4px" }}>
+              <Space h="20px" />
+              <Group position="center" direction="column">
+                <Text>Prompt by: {payload.username}</Text>
+                <Text>Written by: {by}</Text>
+              </Group>
+              <Space h="10px" />
+              <Space h="20px" />
+              <Group position="apart"></Group>
+
+              <Text style={{ whiteSpace: "pre-line" }}>
+                {payload.promptText}
               </Text>
-            )}
+
+              <Space h="20px" />
+
+              <Space h="20px" />
+              <Divider />
+              {parse(storyNodesMappedPDF.join(""))}
+              {payload.status === "Ongoing" ? (
+                <div>
+                  {" "}
+                  <Text>{`and then...`}</Text>
+                  <Text>Continue the story at: </Text>
+                  <Anchor
+                    size="xl"
+                    component={Link}
+                    to={`/prompt/${promptID}`}
+                    color="dark"
+                  >
+                    {`https://and-then-front-end.herokuapp.com/prompt/${promptID}`}
+                  </Anchor>
+                </div>
+              ) : (
+                <Text size="xl" align="center">
+                  The end.
+                </Text>
+              )}
+            </div>
           </div>
         </div>
       ) : (

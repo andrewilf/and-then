@@ -118,9 +118,10 @@ const PromptPage = () => {
         data.followers.find((element) => element == user._id) === user._id,
         user
       );
-      document.title = `Then - ${data.title}`
+      document.title = `Then - ${data.title}`;
       setFollow(
-        data.followers.find((element) => element == user._id) === user._id && user._id !== undefined
+        data.followers.find((element) => element == user._id) === user._id &&
+          user._id !== undefined
           ? true
           : false
       );
@@ -214,7 +215,7 @@ const PromptPage = () => {
 
   useEffect(() => {
     promptAPICall();
-    
+
     //setScroll({ y: 0 });
   }, [user, promptID]);
 
@@ -345,13 +346,23 @@ const PromptPage = () => {
               </Text>
             </Collapse>
             <Space h="20px" />
-            <Button
-              radius="md"
-              color="dark"
-              onClick={() => setCollapseInfo((o) => !o)}
-            >
-              Toggle additional info
-            </Button>
+            <Group position="apart">
+              <Button
+                radius="md"
+                color="dark"
+                onClick={() => setCollapseInfo((o) => !o)}
+              >
+                Toggle additional info
+              </Button>
+              <Button
+                radius="md"
+                color="dark"
+                component={Link}
+                to={`/promptpdf/${promptID}`}
+              >
+                View as book
+              </Button>
+            </Group>
             <Collapse in={collapseInfo}>
               <Space h="20px" />
               <Text style={{ whiteSpace: "pre-line" }}>

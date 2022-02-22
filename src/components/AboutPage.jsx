@@ -22,7 +22,7 @@ const AboutPage = () => {
       <Title>Feedback</Title>
       <Divider />
       <Text>
-        Please send all feedback or bug reports to Andrew Faulkner. You should
+        Please send all feedback or bug reports to me directly. You should
         have my contact if you are a part of the Alpha launch :,)
       </Text>
       <Space h="65px" />
@@ -32,7 +32,9 @@ const AboutPage = () => {
       <Title order={3}>version 0.7 (Alpha test)</Title>
       <ul>
         <li>Storylines can now be ended</li>
-        <li>Titles change on page change, faveicon changed</li>
+        <li>Titles change on page change, logo updated, faveicon changed</li>
+        <li>Added a book view, read the storylines in a more traditional format</li>
+        <li>Added a basic PDF downloader, in this version the sizing of the document will be wonky</li>
       </ul>
       <Space h="15px" />
       <Title order={3}>version 0.6 (Alpha test)</Title>
