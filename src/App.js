@@ -123,6 +123,7 @@ function App() {
           username: data.username,
         };
         setUser(userDetails);
+        //console.log(data);
         setLoggedIn(true);
         if (data.role === "admin") {
           setAdmin(true);
@@ -210,7 +211,10 @@ function App() {
                   element={<EditNodePage />}
                 />
                 <Route path="/prompt/:promptID" element={<PromptPage />} />
-                <Route path="/promptpdf/:promptID" element={<PromptPagePDF />} />
+                <Route
+                  path="/promptpdf/:promptID"
+                  element={<PromptPagePDF />}
+                />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route
                   path="/signin"
