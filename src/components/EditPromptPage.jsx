@@ -179,7 +179,7 @@ const EditPromptSection = () => {
   };
 
   useEffect(() => {
-    //  setScroll({ y: 0 });
+
     promptAPICall();
   }, []);
   return (

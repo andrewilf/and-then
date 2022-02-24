@@ -10,6 +10,7 @@ import {
   Select,
   Image,
 } from "@mantine/core";
+import { useWindowScroll } from "@mantine/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import SelectTags from "./SelectTags";
 import { ArrowLeftIcon } from "@modulz/radix-icons";
@@ -21,6 +22,7 @@ const CreatePromptPage = () => {
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
+  const [scroll, setScroll] = useWindowScroll();
   const notifications = useNotifications();
   const navigate = useNavigate();
   const genreTags = process.env.REACT_APP_GENRE_TAGS.split(",");

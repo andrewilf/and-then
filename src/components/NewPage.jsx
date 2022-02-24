@@ -62,7 +62,7 @@ const NewPage = (props) => {
           }}
         >
           <Group position="center" direction="column">
-            <Title order={3}>Prompt/Provoke</Title>
+            <Title order={3}>Prompt</Title>
             <Text align="center">
               Take on an editor role and start a story with a prompt - anything
               you like - and the community will join in and together, you will
@@ -90,7 +90,7 @@ const NewPage = (props) => {
           }}
         >
           <Group position="center" direction="column">
-            <Title order={3}>Participate/Play</Title>
+            <Title order={3}>Participate</Title>
             <Text>
               Join the community and help bring any story to life by adding your
               own unique take to the plot. Bounce ideas off others - you will be
