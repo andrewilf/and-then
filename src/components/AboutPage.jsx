@@ -17,9 +17,9 @@ const AboutPage = () => {
       <Divider />
       <Text>
         And Then is an independent project which aims to create a collaborative
-        writing platform. The platform is a React app with
-        an express server set up to handle the backend. All MongoDB database
-        transactions are done using Mongoose.
+        writing platform. The platform is a React app with an express server set
+        up to handle the backend. All MongoDB database transactions are done
+        using Mongoose.
       </Text>
       <Space h="65px" />
       <Title>Feedback</Title>
@@ -32,9 +32,10 @@ const AboutPage = () => {
       <Title>Changelog</Title>
       <Divider />
       <Space h="15px" />
-      <Title order={3}>version 0.8 (Alpha test)</Title>
+      <Title order={3}>version 0.9 (Alpha test)</Title>
       <ul>
         <li>Profile page now works</li>
+        <li>Added confetti on story completion</li>
         <li>
           Username can now be changed. Only unclaimed usernames can used.
           Navigate to the profile page to do so
@@ -60,7 +61,7 @@ const AboutPage = () => {
       </ul>
       <Title order={3}>Upcoming features</Title>
       <ul>
-        <li>Able to save stories as PDFs</li>
+        <li>Able to save stories as PDFs with proper formatting</li>
       </ul>
     </div>
   );

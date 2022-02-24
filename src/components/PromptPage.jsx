@@ -23,6 +23,7 @@ import { Pencil1Icon } from "@modulz/radix-icons";
 import { LoginContext, adminContext, userContext } from "../global/context";
 import variousVariables from "./variousVariables";
 import { useModals } from "@mantine/modals";
+import ConfettiExplosion from "react-confetti-explosion";
 
 const PromptPage = () => {
   const [payload, setPayload] = useState({
@@ -59,6 +60,7 @@ const PromptPage = () => {
       onConfirm: () => {
         console.log("Confirmed");
         endStorylineAPICall();
+        setConfetti(true);
         //command to close modal
         modals.closeModal();
       },
@@ -73,6 +75,7 @@ const PromptPage = () => {
   const [collapseInfo, setCollapseInfo] = useState(false);
   const [loading, setLoading] = useState(false);
   const [storyNodes, setStoryNodes] = useState([]);
+  const [confetti, setConfetti] = useState(false);
   const [proposedNodes, setProposedNodes] = useState([]);
   //const [updateToggle, setupdateToggle] = useState(false);
   const storyNodesMapped = storyNodes.map((element) => (
@@ -454,6 +457,15 @@ const PromptPage = () => {
                   >
                     Suggest node
                   </Button>
+                  {confetti && (
+                        <ConfettiExplosion
+                          force={0.6}
+                          duration={5000}
+                          particleCount={200}
+                          floorHeight={1600}
+                          floorWidth={1600}
+                        />
+                      )}
                   {payload.owner === user._id ? (
                     <div>
                       <Button
@@ -461,6 +473,7 @@ const PromptPage = () => {
                         // to={`/createnode/${promptID}/${payload.storyline[0]._id}`}
                         onClick={() => {
                           console.log("the end");
+                         
                           openConfirmModal();
                         }}
                         radius="md"
@@ -469,6 +482,7 @@ const PromptPage = () => {
                       >
                         The End.
                       </Button>
+                     
                     </div>
                   ) : (
                     <div></div>

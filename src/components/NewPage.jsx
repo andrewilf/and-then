@@ -52,7 +52,7 @@ const NewPage = (props) => {
           style={{
             //  backgroundColor: theme.colors.dark[7],
             width: "30%",
-            border: "1px solid black",
+            border: "1px solid gray",
             borderRadius: "15px",
             padding: "1%",
             margin: "auto",
@@ -83,7 +83,7 @@ const NewPage = (props) => {
           style={{
             //  backgroundColor: theme.colors.dark[7],
             width: "30%",
-            border: "1px solid black",
+            border: "1px solid gray",
             borderRadius: "15px",
             padding: "1%",
             margin: "auto",
@@ -109,7 +109,7 @@ const NewPage = (props) => {
           style={{
             //  backgroundColor: theme.colors.dark[7],
             width: "30%",
-            border: "1px solid black",
+            border: "1px solid gray",
             borderRadius: "15px",
             padding: "1%",
             margin: "auto",

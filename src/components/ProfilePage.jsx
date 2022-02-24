@@ -233,7 +233,7 @@ const ProfilePage = () => {
                   borderRadius: "15px",
                   padding: "5%",
                   margin: "auto",
-                  color: "white"
+                  color: "white",
                 }}
               >
                 <Text>Owned Prompts: {profileInfo.ownedPrompts.length}</Text>
@@ -261,7 +261,7 @@ const ProfilePage = () => {
                   border: "1px solid black",
                   borderRadius: "15px",
                   padding: "5%",
-                  color: "white"
+                  color: "white",
                 }}
               >
                 <Group spacing={"2px"} direction="column">
@@ -295,7 +295,7 @@ const ProfilePage = () => {
                   border: "1px solid black",
                   borderRadius: "15px",
                   padding: "5%",
-                  color: "white"
+                  color: "white",
                 }}
               >
                 <Group spacing={"2px"} direction="column">
