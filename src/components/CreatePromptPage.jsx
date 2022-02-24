@@ -239,6 +239,11 @@ const CreatePromptPage = () => {
             size="xl"
             disabled={loading}
             type="submit"
+            onClick={() => {
+              if (!form.validate()) {
+                setScroll({ y: 0 });
+              }
+            }}
           >
             Publish prompt
           </Button>

@@ -227,12 +227,13 @@ const ProfilePage = () => {
               </Title>
               <div
                 style={{
-                  backgroundColor: theme.colors.dark[7],
+                  backgroundColor: "rgb(104, 104, 137)",
                   width: "100%",
                   border: "1px solid black",
                   borderRadius: "15px",
                   padding: "5%",
                   margin: "auto",
+                  color: "white"
                 }}
               >
                 <Text>Owned Prompts: {profileInfo.ownedPrompts.length}</Text>
@@ -255,11 +256,12 @@ const ProfilePage = () => {
               </Title>
               <div
                 style={{
-                  backgroundColor: theme.colors.dark[7],
+                  backgroundColor: "rgb(104, 104, 137)",
                   height: "300px",
                   border: "1px solid black",
                   borderRadius: "15px",
                   padding: "5%",
+                  color: "white"
                 }}
               >
                 <Group spacing={"2px"} direction="column">
@@ -288,11 +290,12 @@ const ProfilePage = () => {
               </Title>
               <div
                 style={{
-                  backgroundColor: theme.colors.dark[7],
+                  backgroundColor: "rgb(104, 104, 137)",
                   height: "300px",
                   border: "1px solid black",
                   borderRadius: "15px",
                   padding: "5%",
+                  color: "white"
                 }}
               >
                 <Group spacing={"2px"} direction="column">

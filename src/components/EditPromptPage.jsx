@@ -325,7 +325,9 @@ const EditPromptSection = () => {
                 // component={Link}
                 type="submit"
                 onClick={() => {
-                  setScroll({ y: 0 });
+                  if (!form.validate()) {
+                    setScroll({ y: 0 });
+                  }
                 }}
                 // to={`/prompt/${promptID}`}
               >

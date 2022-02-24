@@ -50,7 +50,7 @@ const NavigationBar = (props) => {
                 style={{
                   height: "25px",
                   width: "25px",
-                  backgroundColor: "gray",
+                  backgroundColor: "rgb(104, 104, 137)",
                   textAlign: "center",
                   marginRight: "9px",
                 }}
