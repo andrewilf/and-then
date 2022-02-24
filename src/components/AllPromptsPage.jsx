@@ -37,6 +37,7 @@ const AllPromptsPage = () => {
   //setActivePage(3);
 
   const promptAPICall = async (page) => {
+    setLoading(true)
     let baseURL = `https://and-then-backend.herokuapp.com/prompt/search/${page}/?`;
     if (genreSelect.length !== 0) {
       baseURL += `genre=${genreSelect}&`;
@@ -87,11 +88,9 @@ const AllPromptsPage = () => {
 
   useEffect(async () => {
     let isMounted = true;
-    console.log(loading);
     document.title = `Then - All prompts`;
     if (isMounted) {
       setScroll({ y: 0 });
-      //setLoading(true);
       promptAPICall(activePage);
     }
     return () => {

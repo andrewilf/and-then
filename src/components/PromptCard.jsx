@@ -70,7 +70,7 @@ const PromptCard = (props) => {
             {props.rating}
           </Badge>
         </Group>
-        <Space h="10px" />
+        <Space h="14px" />
         <Group position="apart">
           <Text size="xs">
             Last update:{" "}

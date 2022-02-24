@@ -1,8 +1,11 @@
 import { Title, Divider, Text, Space } from "@mantine/core";
 import { useState, useEffect, useContext } from "react";
+import { useWindowScroll } from "@mantine/hooks";
 const AboutPage = () => {
+  const [scroll, setScroll] = useWindowScroll();
   useEffect(() => {
     document.title = `Then - About`;
+    setScroll({ y: 0 });
   }, []);
   return (
     <div
@@ -14,7 +17,7 @@ const AboutPage = () => {
       <Divider />
       <Text>
         And Then is an independent project which aims to create a collaborative
-        writing platform for aspiring authors. The platform is a React app with
+        writing platform. The platform is a React app with
         an express server set up to handle the backend. All MongoDB database
         transactions are done using Mongoose.
       </Text>
@@ -58,9 +61,6 @@ const AboutPage = () => {
       <Title order={3}>Upcoming features</Title>
       <ul>
         <li>Able to save stories as PDFs</li>
-        <li>Profile Page works</li>
-        <li>I am new page populated</li>
-        <li>About page populated</li>
       </ul>
     </div>
   );

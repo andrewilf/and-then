@@ -80,7 +80,17 @@ const PromptPage = () => {
       key={element._id + "-sn"}
       text={element.text}
       author={element.author}
+      canEdit={admin ? true : false}
       updatedAt={element.updatedAt}
+      _id={element._id}
+      promptAPI={async () => {
+        //await followAPICall(promptID);
+        await promptAPICall(promptID);
+      }}
+      // updateToggle={updateToggle}
+      //setupdateToggle={setupdateToggle}
+      storyline={payload.storyline[0]._id}
+      promptID={promptID}
     />
   ));
   const proposedNodesMapped = proposedNodes.map((element) => (
