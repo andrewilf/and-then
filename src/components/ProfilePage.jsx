@@ -1,13 +1,9 @@
 import {
   Title,
-  Space,
   Group,
   Button,
-  InputWrapper,
   TextInput,
-  Textarea,
   Text,
-  Select,
   Image,
   Center,
   Loader,
@@ -22,8 +18,6 @@ import { Pencil1Icon } from "@modulz/radix-icons";
 import { useEffect, useContext, useState } from "react";
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const theme = useMantineTheme();
-  const modals = useModals();
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { admin, setAdmin } = useContext(adminContext);
   const { user, setUser } = useContext(userContext);
