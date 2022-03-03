@@ -1,72 +1,71 @@
-# WIP am slowly populating readme
+![and then logo](https://github.com/andrewilf/and-then/blob/main/src/img/and%20then%20logo.png?raw=true)
+Prompt, Participate, Publish!
 
-# Getting Started with Create React App
+**Background:**
+readme file is a wip. Please be patient.
+**Scope:**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Try it here: https://and-then-front-end.herokuapp.com/
+**Note the app may initially take a while to start up on Heroku since it is hosted on a free account. If the app is reported to have crashed, refresh the page.**
 
-## Available Scripts
+Backend repository: https://github.com/andrewilf/and-then-backend
 
-In the project directory, you can run:
+# Table of Contents
 
-### `npm start`
+- [Features](#Features)
+- [Instructions](#Instructions)
+- [npm Libraries Used](#npm-Libraries-Used)
+- [Developer Notes](#Developer-Notes)
+- [Areas to improve on/wish list](#areas-to-improve-onwish-list)
+- [Running the App locally](#running-the-app-locally)
+- [Links](#Links)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In its current inplementation, And Then has the following features:
 
-### `npm test`
+- **test**: lorem
+  ![feed image](url)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Instructions
 
-### `npm run build`
+## Creating a new account
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# npm Libraries Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Mantine (core, hooks, modals, notifications, rte): https://mantine.dev/
+- date-fns: https://www.npmjs.com/package/date-fns
+- React Responsive Carousel: https://www.npmjs.com/package/react-responsive-carousel
+- Radix Icons: https://icons.modulz.app/
+- React to PDF: https://www.npmjs.com/package/react-to-pdf
+- React Confetti Explosion: https://www.npmjs.com/package/react-confetti-explosion
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Developer Notes
 
-### `npm run eject`
+- s
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Areas to improve on/wish list
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Refine Rich Text Editor, currently copying text from another source will also copy over their html as well.
+- PDF generation for prompts needs to be improved. Current implementation is quite crude and may have strange formatting.
+- Add appropriate error pages or redirects.
+- Handle user authentication better. Requires security to be improved upon on the backend.
+- Remove .env genre variable to instead use the genre variable found in "components/variousVariables.js" as they are identical.
+- Add ability to tag multiple genres to a story.
+- Investigate occasional application crash on Heroku server when idling for a long stretch of time. Logs seem to indicate a memory leak though no possible source of error can be found.
+- Use web sockets to notify users of actions done by other users such as contributions or having their node added to a storyline.
+- Add typical social features such as likes, comments, and user messaging.
+- Add ability for node owners to edit nodes already added to a storyline.
+- Add ability to branch out storylines from certain nodes. (A lot of rework would be required. Needs more consideration from a design perspective and user journey).
+- Add light and dark mode toggle. Currently only stays in dark mode.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Running the app locally
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+If you wish to clone and run this app on your local machine:
 
-## Learn More
+- you need to configure some config variables. You can edit the included file "dotenv"(remember to rename it .env) and write your own API details which the app will use.
+- Run the following commands inside your AND-THEN folder: npm install, npm start.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Links
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andrewianfaulkner/)
