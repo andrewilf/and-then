@@ -155,6 +155,7 @@ const AllPromptsPage = () => {
           tags={genreTags}
           value={genreSelect}
           setValue={setGenreSelect}
+          setPage={setActivePage}
           multiple={true}
         />
         <Space h="xs" />
@@ -164,6 +165,7 @@ const AllPromptsPage = () => {
           tags={["Everyone", "Teen", "Mature"]}
           value={ratingSelect}
           setValue={setRatingSelect}
+          setPage={setActivePage}
           multiple={true}
         />
         <Space h="xs" />
@@ -173,6 +175,7 @@ const AllPromptsPage = () => {
           tags={["Ongoing", "Completed"]}
           value={statusSelect}
           setValue={setStatusSelect}
+          setPage={setActivePage}
           multiple={true}
         />
       </div>
@@ -185,7 +188,6 @@ const AllPromptsPage = () => {
           page={activePage}
           onChange={(page) => {
             setActivePage(page);
-            //  setScroll({ y: 0 });
             console.log(page);
           }}
         />

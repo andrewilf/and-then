@@ -3,9 +3,11 @@ import { useEffect } from "react";
 
 const SelectTags = (props) => {
   const theme = useMantineTheme();
-  const tags = (props.tags?props.tags: [""])
+  const tags = props.tags ? props.tags : [""];
   const ChipsForTags = tags.map((element) => (
-    <Chip key={element} value={element}>{element}</Chip>
+    <Chip key={element} value={element}>
+      {element}
+    </Chip>
   ));
   // useEffect(()=>{
   //   props.onClick()
@@ -19,7 +21,13 @@ const SelectTags = (props) => {
         position="center"
         color="green"
         value={props.value}
-        onChange={props.setValue}
+        onChange={(e) => {
+          props.setValue(e);
+          if (props.setPage) {
+            console.log("setting page to 1");
+            props.setPage(1)
+          }
+        }}
         styles={{
           label: { color: "grey" },
           checked: { color: "white" },
