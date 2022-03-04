@@ -2,13 +2,16 @@
 Prompt, Participate, Publish!
 
 **Background:**
-readme file is a wip. Please be patient.
+And Then is a collaborative writing platform for aspiring or adventurous authors who wish to write stories through a community. It is an attempt to solve the issues people who wish to write collaboratively face. It uses the MERN stack in its current iteration.
+The backend repository can be found here: https://github.com/andrewilf/and-then-backend
+
 **Scope:**
+The project aims to cover all the features users would need to write a simple crowd sourced story. This entails the ability to write prompts, suggest paragraphs(called nodes), add nodes to the prompt storyline, and end the story which prevents further contributions from being added.
+
+It should be noted such a platform would be envisioned to also have typical social features platforms like Reddit or WattPad would have such as: likes, comments, user messaging, and instant notifications. These will be exluded from the scope of the current project iteration.
 
 Try it here: https://and-then-front-end.herokuapp.com/
 **Note the app may initially take a while to start up on Heroku since it is hosted on a free account. If the app is reported to have crashed, refresh the page.**
-
-Backend repository: https://github.com/andrewilf/and-then-backend
 
 # Table of Contents
 
@@ -24,12 +27,29 @@ Backend repository: https://github.com/andrewilf/and-then-backend
 
 In its current inplementation, And Then has the following features:
 
-- **test**: lorem
+- **Create stories together with a community**: lorem
+  ![feed image](url)
+
+- **Robust prompt search**: lorem
+  ![feed image](url)
+
+- **Follow story prompts**: lorem
+  ![feed image](url)
+
+- **Get recommended recently made or trending prompts**: lorem
   ![feed image](url)
 
 # Instructions
 
-## Creating a new account
+### Creating a new prompt
+
+### Suggesting a story node to a prompt
+
+### Approve a suggested story node to your prompt
+
+### End the story
+
+### Save it as a PDF
 
 # npm Libraries Used
 
@@ -42,7 +62,10 @@ In its current inplementation, And Then has the following features:
 
 # Developer Notes
 
-- s
+- And Then is seen as an ongoing project which will go through large overhauls between versions. Extensive code rewrites will likely be required.
+- Each prompt currently only has one storyline attached.
+- When a suggested node is added to the storyline, all other suggested nodes are deleted.
+- Nodes which have been added to a storyline currently cannot be edited by non admin users. This is to prevent user vandalism to stories should disagreements between users occur. A system where users can still perform edits should be implemented but changes should only go into effect pending the prompt owner's approval.
 
 # Areas to improve on/wish list
 
@@ -59,6 +82,7 @@ In its current inplementation, And Then has the following features:
 - Add ability to branch out storylines from certain nodes. (A lot of rework would be required. Needs more consideration from a design perspective and user journey).
 - Add light and dark mode toggle. Currently only stays in dark mode.
 - Hide "mature" rated stories when not logged in and in new accounts. Mature stories will show up in the user's search if a setting is toggled.
+- The ability to upload and use custom prompt cover images.
 
 # Running the app locally
 
