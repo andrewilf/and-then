@@ -192,7 +192,7 @@ const AllPromptsPage = () => {
       </Center>
       <Space h="40px" />
       <Group position="center">
-        <Grid grow={false} columns={9} justify="flex-start">
+        <Grid grow={true} columns={9} justify="flex-start">
           {loading ? <Grid.Col span={3}><Loader color="gray" variant="dots" /></Grid.Col> : allPromptCards}
         </Grid>
 

@@ -58,6 +58,7 @@ In its current inplementation, And Then has the following features:
 - Add ability for node owners to edit nodes already added to a storyline.
 - Add ability to branch out storylines from certain nodes. (A lot of rework would be required. Needs more consideration from a design perspective and user journey).
 - Add light and dark mode toggle. Currently only stays in dark mode.
+- Hide "mature" rated stories when not logged in and in new accounts. Mature stories will show up in the user's search if a setting is toggled.
 
 # Running the app locally
 
