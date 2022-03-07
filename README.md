@@ -40,8 +40,8 @@ Found a prompt you like? With an account you can click on the follow switch and 
 Curious about what's new or hot? On the home page look through the 3 latest or trending prompts on the platform. Join a project that just started or be part of the momentum of the next big project around.
   
 ### Get suggested a random prompt
-If you are feeling particularly adventurous search for a random prompt. You will be brought to a prompt you might have never thought about searching for.
-
+If you are feeling particularly adventurous search for a random prompt. You will be brought to a prompt you might have never thought about searching for. This feature can be found by clicking on the random prompt option on the top bar.
+![random](https://github.com/andrewilf/and-then/blob/main/readme_imgs/randombar.png?raw=true)
 # Instructions
 
 This acts as a guide on how to generally use the platform:
@@ -51,7 +51,7 @@ Most features of And Then need an account to access besides searching and readin
 ### Creating a new prompt
 To create a prompt, click on the create prompt password found on the top left of the all prompts page. You will be brought to a creation page. Here you must enter the prompt title, prompt text, additional info you feel is relevant to contributors( such as writing point of view or approval conditions), genre (only 1 genre can currently be chosen), rating, and banner image. 
 As a prompt owner you can still edit prompts so do not stress out if you accidentally make a typo or feel your prompt has moved in a very different direction since the beginning.
-
+![create prompt](https://github.com/andrewilf/and-then/blob/main/readme_imgs/createprompt.png?raw=true)
 ### Suggesting a story node to a prompt
 If you wish to contribute to a prompt instead, find a prompt you want to contribute and click on the contribute node button at the bottom of the page. You will be brought to the create node page with a text editor to type in your contribution.
 Do note while a node is still a suggested node it can be edited. However if your node gets added to a storyline, it currently cannot be edited by a non-admin user.
