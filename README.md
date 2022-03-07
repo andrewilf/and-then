@@ -55,17 +55,17 @@ As a prompt owner you can still edit prompts so do not stress out if you acciden
 ### Suggesting a story node to a prompt
 If you wish to contribute to a prompt instead, find a prompt you want to contribute and click on the contribute node button at the bottom of the page. You will be brought to the create node page with a text editor to type in your contribution.
 Do note while a node is still a suggested node it can be edited. However if your node gets added to a storyline, it currently cannot be edited by a non-admin user.
-
+![create node](https://github.com/andrewilf/and-then/blob/main/readme_imgs/createnode.png?raw=true)
 ### Approve a suggested story node to your prompt
 If multiple people suggest a node to your prompt, you can browse all the contributions. As the prompt owner if you find a particular node which you like, click on the checkbox to add it to the prompt's storyline. Do note nodes added to a storyline cannot be removed.
-
+![approve node](https://github.com/andrewilf/and-then/blob/main/readme_imgs/approve.png?raw=true)
 ### End the story
 As a prompt owner, if you wish to end a prompt and prevent any further contributions from being made, scroll to the bottom of the prompt and click the green "The End." button. A modal will appear to confirm if you want to end the story.
-![feed image](url)
+![the end](https://github.com/andrewilf/and-then/blob/main/readme_imgs/theend.png?raw=true)
 Congratulations on completing your story!
 ### Read or save it for later
 If you want to read a prompt's full storyline in a more traditional manner without the node formatting, click on the "view as book" button on the prompt page. It can be found on the right side below the prompts banner image.
-![feed image](url)
+![book view](https://github.com/andrewilf/and-then/blob/main/readme_imgs/bookview.png?raw=true)
 If you instead wish to save the story as a PDF to read it offline, share it with others, or keep it for posterity, click on the "generate PDF" button on the top right of the prompt's "book view" page.
 Do note this "book view" and the ability to save the story as a PDF can be done whether the story is ongoing on completed.
 
